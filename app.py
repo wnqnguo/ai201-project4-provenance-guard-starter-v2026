@@ -31,6 +31,8 @@ from flask import Flask, jsonify, request
 import audit
 import config
 import detector
+import scoring
+import stylometry
 
 app = Flask(__name__)
 
@@ -221,12 +223,15 @@ def submit():
 
     content_id = str(uuid.uuid4())
 
-    # Milestone 3, step 3: the real model signal. The rest are still placeholders
-    # until Milestones 4 and 5.
+    # Milestones 3 and 4: both signals, combined into one score.
     model_score = detector.model_signal(text)
-    style_score = 0.5          # placeholder until Milestone 4
-    confidence = 0.5           # placeholder until Milestone 4
-    guess = "human"            # placeholder until Milestone 4
+    style_score = stylometry.style_signal(text)
+    combined = scoring.combine_signals(model_score, style_score)
+
+    # The guess is which side of 0.5 the combined score falls on. Confidence is
+    # how sure that guess is: 0.5 means a coin flip, 1.0 means certain.
+    guess = "ai" if combined >= 0.5 else "human"
+    confidence = round(max(combined, 1 - combined), 4)
     label = "unsure"           # placeholder until Milestone 5
 
     # Milestone 3, step 4: log every decision.
@@ -236,7 +241,7 @@ def submit():
         guess=guess,
         model_score=model_score,
         style_score=style_score,
-        combined_score=confidence,
+        combined_score=combined,
         label=label,
         status="decided",
     )

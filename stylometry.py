@@ -45,6 +45,19 @@ def words(text: str) -> list[str]:
     return re.findall(r"[a-z0-9']+", text.lower())
 
 
+# Calibration constants for style_signal. A raw value at or above its cap counts
+# as fully human-looking (0 for that measure); a raw value of 0 counts as fully
+# AI-looking (1). Adjust after looking at real numbers.
+SPREAD_FULLY_HUMAN = 0.8
+TTR_FULLY_HUMAN = 1.0
+PUNCT_FULLY_HUMAN = 0.15
+NEUTRAL_SPREAD = 0.4   # returned for one-sentence text; sits mid-range
+
+
+def _clamp01(x: float) -> float:
+    return max(0.0, min(1.0, x))
+
+
 # ── The three measures — YOU BUILD THESE ─────────────────────────────────────
 
 def sentence_length_spread(text: str) -> float:
@@ -64,8 +77,15 @@ def sentence_length_spread(text: str) -> float:
     `stdev` raises on fewer than two values. Decide what that should return
     before the attack set decides for you.
     """
-    # TODO: replace this
-    return 0.0
+    # Raw scale: standard deviation / mean of sentence lengths in words.
+    # Roughly 0.2 for very even prose and 0.8 or more for lumpy prose.
+    # HIGHER raw value = more human. Needs flipping in style_signal.
+    lengths = [len(words(sentence)) for sentence in sentences(text)]
+    lengths = [n for n in lengths if n > 0]
+    if len(lengths) < 2:
+        return NEUTRAL_SPREAD  # one sentence has no spread: say nothing either way
+    mean = statistics.mean(lengths)
+    return statistics.stdev(lengths) / mean
 
 
 def type_token_ratio(text: str) -> float:
@@ -80,8 +100,11 @@ def type_token_ratio(text: str) -> float:
     directly comparable on it, and if your test inputs vary a lot in length,
     that alone can look like a signal.
     """
-    # TODO: replace this
-    return 0.0
+    # Raw scale: 0 to 1. HIGHER raw value = more human. Needs flipping.
+    tokens = words(text)
+    if not tokens:
+        return 0.0
+    return len(set(tokens)) / len(tokens)
 
 
 def punctuation_density(text: str) -> float:
@@ -94,8 +117,15 @@ def punctuation_density(text: str) -> float:
         more interesting than full stops, because they vary more between
         writers.
     """
-    # TODO: replace this
-    return 0.0
+    # Raw scale: counted marks per word. Only ; : , and dashes count, because
+    # they vary more between writers than full stops do.
+    # Roughly 0.05 for sparse punctuation and 0.2 or more for heavy punctuation.
+    # HIGHER raw value = more human. Needs flipping.
+    tokens = words(text)
+    if not tokens:
+        return 0.0
+    marks = len(re.findall(r"[;:,\u2014\u2013]|--", text))
+    return marks / len(tokens)
 
 
 # ── Combining them ───────────────────────────────────────────────────────────
@@ -122,8 +152,13 @@ def style_signal(text: str) -> float:
     you trust it. Plain and ordinary, not formal: formal prose reads as *human*
     to signal one, and it is plain writing that gets accused.
     """
-    # TODO: replace this
-    return 0.5
+    # Each raw measure points toward HUMAN when it is high, so each one is
+    # flipped: AI-likeness = 1 - (raw / the value where I call it fully human).
+    # The cap values below are my own rough calibration, not a standard.
+    spread_ai = 1 - _clamp01(sentence_length_spread(text) / SPREAD_FULLY_HUMAN)
+    ttr_ai = 1 - _clamp01(type_token_ratio(text) / TTR_FULLY_HUMAN)
+    punct_ai = 1 - _clamp01(punctuation_density(text) / PUNCT_FULLY_HUMAN)
+    return round((spread_ai + ttr_ai + punct_ai) / 3, 4)
 
 
 if __name__ == "__main__":
