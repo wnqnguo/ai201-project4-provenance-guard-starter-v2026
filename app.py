@@ -232,7 +232,7 @@ def submit():
     # how sure that guess is: 0.5 means a coin flip, 1.0 means certain.
     guess = "ai" if combined >= 0.5 else "human"
     confidence = round(max(combined, 1 - combined), 4)
-    label = "unsure"           # placeholder until Milestone 5
+    _, label = scoring.score_to_label(combined)   # the full sentence a reader sees
 
     # Milestone 3, step 4: log every decision.
     audit.log_decision(
@@ -276,14 +276,35 @@ def appeal():
     to the person on the other end. It's the only thing standing between a
     wrong accusation and nothing at all.
     """
-    payload = request.get_json(silent=True) or {}
+    payload = request.get_json(silent=True)
+    if not isinstance(payload, dict):
+        return jsonify({"error": "invalid_json",
+                        "message": "Send a JSON object with content_id and reasoning."}), 400
 
-    # TODO: delete this and build the route.
+    content_id = payload.get("content_id")
+    reasoning = payload.get("reasoning")
+
+    if not isinstance(content_id, str) or not content_id.strip():
+        return jsonify({"error": "invalid_content_id",
+                        "message": "content_id is required and must be a non-empty string."}), 400
+    if not isinstance(reasoning, str) or not reasoning.strip():
+        return jsonify({"error": "invalid_reasoning",
+                        "message": "reasoning is required and must be a non-empty string."}), 400
+
+    # The content_id has to exist, or the appeal would be recorded against nothing.
+    original = audit.entries_for(content_id)
+    if not original:
+        return jsonify({"error": "unknown_content_id",
+                        "message": "No submission found with that content_id."}), 404
+
+    creator_id = original[0].get("creator_id")
+    audit.log_appeal(content_id=content_id, creator_id=creator_id, reasoning=reasoning)
+
     return jsonify({
-        "error": "not_implemented",
-        "message": "POST /appeal isn't built yet — see the TODO in app.py.",
-        "you_sent": payload,
-    }), 501
+        "content_id": content_id,
+        "status": "under_review",
+        "message": "Your appeal has been recorded and a person will take a look.",
+    })
 
 
 # ── Already works ─────────────────────────────────────────────────────────────

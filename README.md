@@ -70,7 +70,7 @@ If the writer disagrees, `POST /appeal` takes the `content_id` and their reasoni
 
 ### Signal two — the style signal
 
-**What it measures:** The shape of the text as text, without understanding it: how much sentence length varies, how much of the vocabulary repeats, and how much punctuation there is. <!-- Faye: after Milestone 4, say exactly which measures you used and how you combined them. -->
+**What it measures:** The shape of the text as text, without understanding it: how much sentence length varies, how much of the vocabulary repeats, and how much punctuation there is. Exactly: the standard deviation of sentence length divided by the mean, the share of words that are unique, and the number of semicolons, colons, commas and dashes per word. Each is flipped so that low means more AI-like, scaled to 0 to 1 against a cap I set by hand, and the three are averaged with equal weight (`stylometry.py::style_signal`). A one-sentence text has no sentence spread, so that measure returns a neutral value.
 
 **Why that might differ between human and AI writing:** Generated prose tends toward even, mid-length sentences and a narrower band of vocabulary, because that is what "most likely next word" produces on average. Human writing is lumpier, such as a three-word sentence next to a forty-word one.
 
@@ -106,14 +106,13 @@ A short paragraph I wrote myself, about an old woman at a funeral, scored 0.74 o
 
 | Label | Score range | The exact text a reader sees |
 |---|---|---|
-| high-confidence human |  |  |
-| unsure |  |  |
-| high-confidence AI |  |  |
+| high-confidence human | below 0.35 | This looks like it was written by a person. |
+| unsure | 0.35 to 0.65 | We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work. |
+| high-confidence AI | above 0.65 | This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look. |
 
 **Why I worded the "unsure" one this way:**
-<!-- It's the hardest of the three. It has to admit uncertainty without
-     sounding like an accusation, because the person reading it may well have
-     written every word themselves. -->
+
+Most of my own test pieces landed in this band, including writing I did myself, so the person reading it may have written every word. It says what the tools don't know instead of guessing, and it says the result isn't a judgment about the writer, so it can't be read as an accusation.
 
 
 
@@ -121,24 +120,23 @@ A short paragraph I wrote myself, about an old woman at a funeral, scored 0.74 o
 
 ## Sample Run
 
-<!-- One submission and one appeal, pasted as text: the request, the response,
-     and the log entries. -->
-
 **A submission**
-
-<!-- The response needs content_id, guess, confidence, label, AND both
-     signal scores - model_score and style_score. Unit 8's tools read those
-     two off the response, so leaving them out costs you next unit's
-     diagnostics. -->
 
 ```bash
 $ curl -X POST http://127.0.0.1:5000/submit \
   -H "Content-Type: application/json" \
-  -d '{"text": "...", "creator_id": "..."}'
+  -d '{"text": "Technology has transformed the way people communicate in modern society. It offers many benefits, including faster access to information and improved connectivity. Social media platforms allow individuals to share ideas with a global audience. However, it also presents challenges, such as privacy concerns and misinformation. Overall, it is important to use technology responsibly and thoughtfully.", "creator_id": "faye"}'
 ```
 
 ```json
-
+{
+  "confidence": 0.6776,
+  "content_id": "b7a06def-a9c8-4129-ad9d-d2d69e1ee447",
+  "guess": "ai",
+  "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+  "model_score": 0.8456,
+  "style_score": 0.5096
+}
 ```
 
 **An appeal**
@@ -146,38 +144,89 @@ $ curl -X POST http://127.0.0.1:5000/submit \
 ```bash
 $ curl -X POST http://127.0.0.1:5000/appeal \
   -H "Content-Type: application/json" \
-  -d '{"content_id": "...", "reasoning": "..."}'
+  -d '{"content_id": "b7a06def-a9c8-4129-ad9d-d2d69e1ee447", "reasoning": "I wrote this myself as a writing exercise."}'
 ```
 
 ```json
-
+{
+  "content_id": "b7a06def-a9c8-4129-ad9d-d2d69e1ee447",
+  "message": "Your appeal has been recorded and a person will take a look.",
+  "status": "under_review"
+}
 ```
 
 **What the log shows afterwards**
 
+The first entry is the submission above, the next two are other submissions I made in between, and the last is the appeal. The original decision stays where it was, and the appeal sits after it.
+
 ```bash
-$ curl "http://127.0.0.1:5000/log?limit=3"
+$ curl "http://127.0.0.1:5000/log?limit=4"
 ```
 
 ```json
-
+{
+  "count": 4,
+  "entries": [
+    {
+      "timestamp": "2026-10-31T17:30:52+00:00",
+      "content_id": "b7a06def-a9c8-4129-ad9d-d2d69e1ee447",
+      "creator_id": "faye",
+      "guess": "ai",
+      "model_score": 0.8456,
+      "style_score": 0.5096,
+      "combined_score": 0.6776,
+      "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+      "status": "decided"
+    },
+    {
+      "timestamp": "2026-10-31T17:30:56+00:00",
+      "content_id": "0fb45421-d203-4f77-8dca-4442fefedc22",
+      "creator_id": "faye",
+      "guess": "human",
+      "model_score": 0.201,
+      "style_score": 0.4464,
+      "combined_score": 0.3237,
+      "label": "This looks like it was written by a person.",
+      "status": "decided"
+    },
+    {
+      "timestamp": "2026-10-31T17:31:05+00:00",
+      "content_id": "d8905dc5-4724-4704-801a-92a3437eba16",
+      "creator_id": "faye",
+      "guess": "ai",
+      "model_score": 0.6534,
+      "style_score": 0.5017,
+      "combined_score": 0.5776,
+      "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+      "status": "decided"
+    },
+    {
+      "timestamp": "2026-10-31T17:31:37+00:00",
+      "content_id": "b7a06def-a9c8-4129-ad9d-d2d69e1ee447",
+      "creator_id": "faye",
+      "event": "appeal",
+      "status": "under_review",
+      "reasoning": "I wrote this myself as a writing exercise."
+    }
+  ]
+}
 ```
 
 ---
 
 ## How I Used AI
 
-**Moment 1**
+**Moment 1: building the style signal**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Help building the three measures in `stylometry.py` (sentence length spread, unique-word ratio, punctuation density) and turning them into one 0 to 1 score.
+- *What came back:* Three working functions and a `style_signal` that flips each measure so that high means more AI-like, then averages them.
+- *What I changed:* I decided which punctuation counts (semicolons, colons, commas and dashes, not full stops) and what a one-sentence text returns (a neutral value). When I tested it, a chatbot paragraph full of long comma lists scored 0.32, which reads as human. I kept the signal as it was and wrote that up as a blind spot instead of tuning it to fit two examples.
 
-**Moment 2**
+**Moment 2: choosing the combining rule**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Which rule to use to combine the two signals.
+- *What came back:* Two options, a plain 50/50 average or an average with a rule for when the signals disagree, and a recommendation for the average.
+- *What I changed:* I went with the plain average, because it already put my own funeral paragraph in "unsure" and my criteria are written against the combined score. I also corrected my README after the service returned 0.74 for the model signal on that paragraph, not the 0.65 from my terminal test, which had stray quote marks in the text.
 
 <!-- ═══════════════════════ UNIT 8 — THE TEST ═══════════════════════ -->
 
