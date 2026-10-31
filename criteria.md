@@ -44,60 +44,55 @@ Two things worth knowing before you pick numbers:
 ---
 ## 1.
 
-<!-- Your criterion. It must name a number. -->
-
-
+Of 10 pieces I wrote myself (varied styles), at most 1 is labeled high-confidence AI.
 
 **Why this target:**
 
+A wrongly accused writer loses trust in the service, and an appeal only fixes it after the damage is done. On a writing site, accusing a real writer costs more than missing some AI text.
 
 
 ---
 
 ## 2.
 
-<!-- Your criterion. -->
-
-
+The average combined score of my 5 AI-written texts is at least 0.3 higher than the average of my 5 human-written texts.
 
 **Why this target:**
 
+If scores bunch in the middle, nearly everything is labeled "unsure" and the service tells readers nothing. A gap of 0.3 on a 0-to-1 scale is wide enough to separate the two groups.
 
 
 ---
 
 ## 3.
 
-<!-- Your criterion. -->
-
-
+Across 15 test texts (a mix of mine and AI-written), each of the three labels appears at least twice.
 
 **Why this target:**
 
+If a label never fires, writers can never get that answer, even when it is the right one.
 
 
 ---
 
 ## 4.
 
-<!-- Your criterion. -->
-
-
+I send 3 appeals for real content IDs and 2 for IDs that don't exist. All 3 real ones return status `under_review` and are recorded in the audit log next to the original decision. All 2 fake ones return a clear error and don't crash the service.
 
 **Why this target:**
 
+An appeal that is silently dropped leaves a wrongly labeled writer with no recourse, so every real appeal has to change status and be recorded.
 
 
 ---
 
 ## 5.
 
-<!-- Your criterion. -->
-
-
+I send 5 bad inputs to `/submit` (empty `text`, missing `text`, whitespace-only `text`, missing `creator_id`, and enormous `text`). All 5 return a clear error message and none crash the service.
 
 **Why this target:**
 
+A service that crashes on bad input is unusable for everyone, not just the person who sent it, and a clear error tells the sender what to fix.
 
 
 ---
