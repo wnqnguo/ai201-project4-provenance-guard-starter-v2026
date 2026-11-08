@@ -814,9 +814,17 @@ Criterion 4 and 5 were met in all three trials and need no diagnosis. I did not 
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** One number in `config.py`: `AI_THRESHOLD` from 0.65 to 0.75. Nothing else moved: the weights are still 0.5 and 0.5, `HUMAN_THRESHOLD` is still 0.35, and the signals, the labels and the route are untouched. The "unsure" band is now 0.35 to 0.75 instead of 0.35 to 0.65.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** The worst outcome of the attack run was a false positive: FP03, a non-native English speaker writing carefully, labeled as possibly AI at a combined 0.714. Six of the eight staff false-positive cases were accused (FP02 to FP07, combined 0.675 to 0.714), and both of my signals failed in the same direction on them, so no combining rule could have rescued them. The cheapest honest fix at the stage where the accusation is made (the label mapping) is to require stronger evidence before saying it. I chose this over input validation, which would fix the five malformed inputs, because a wrongly accused writer is the mistake my own Milestone 1 reasoning says is the expensive one.
+
+**What I predicted before running it again** (written before the after runs, from the combined scores in the before runs):
+
+- All six accused writers (FP02 to FP07) move to "unsure", so false positives that broke go from 6 to 0.
+- MF05 (the very long single word, combined 0.749) also drops to "unsure". MF06 and MF07 stay labeled AI (0.915 and 0.870).
+- The evasion attacks do not change: nine already got a non-AI label, and EV10 (0.854) keeps the AI label.
+- The cost: of my 15 label-coverage texts, only one has a combined score above 0.75, so the AI label appears once instead of five times. Criterion 3 stays MISSED and the AI side of it gets worse. Criterion 1 stays MET. Criterion 2 does not change because it compares scores, not labels.
+- Overall I expect BROKE to fall from 21 to 14 of 56.
 
 ### Attack Run — After
 
