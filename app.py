@@ -118,6 +118,18 @@ if config.RATE_LIMITING_ENABLED:
         }), 429
 
 
+def _refuse(payload, error, message, status=400):
+    """Refuse a request AND leave a trace of it in the audit log."""
+    creator = payload.get("creator_id") if isinstance(payload, dict) else None
+    audit.log_rejection(
+        creator_id=creator if isinstance(creator, str) and creator.strip() else "unknown",
+        reason=error,
+        route=request.path,
+        status_code=status,
+    )
+    return jsonify({"error": error, "message": message}), status
+
+
 # ── The worked example. Already works. Don't edit. ────────────────────────────
 
 @app.post("/ping")
@@ -154,7 +166,7 @@ def health():
 # ── YOU BUILD THIS ────────────────────────────────────────────────────────────
 
 @app.post("/submit")
-# @limiter.limit(f"{config.RATE_LIMIT_PER_MINUTE}/minute;{config.RATE_LIMIT_PER_DAY}/day")
+@limiter.limit(f"{config.RATE_LIMIT_PER_MINUTE}/minute;{config.RATE_LIMIT_PER_DAY}/day")
 def submit():
     """
     Take a piece of text, decide about it, log the decision, answer.
@@ -205,21 +217,17 @@ def submit():
     # Milestone 3, step 2: read and check the input. Scores are still hardcoded.
     payload = request.get_json(silent=True)
     if not isinstance(payload, dict):
-        return jsonify({"error": "invalid_json",
-                        "message": "Send a JSON object with text and creator_id."}), 400
+        return _refuse(payload, "invalid_json", "Send a JSON object with text and creator_id.")
 
     text = payload.get("text")
     creator_id = payload.get("creator_id")
 
     if not isinstance(text, str) or not text.strip():
-        return jsonify({"error": "invalid_text",
-                        "message": "text is required and must be a non-empty string."}), 400
+        return _refuse(payload, "invalid_text", "text is required and must be a non-empty string.")
     if not isinstance(creator_id, str) or not creator_id.strip():
-        return jsonify({"error": "invalid_creator_id",
-                        "message": "creator_id is required and must be a non-empty string."}), 400
+        return _refuse(payload, "invalid_creator_id", "creator_id is required and must be a non-empty string.")
     if len(text) > 20000:
-        return jsonify({"error": "text_too_long",
-                        "message": "text must be 20000 characters or fewer."}), 400
+        return _refuse(payload, "text_too_long", "text must be 20000 characters or fewer.")
 
     content_id = str(uuid.uuid4())
 
@@ -278,24 +286,20 @@ def appeal():
     """
     payload = request.get_json(silent=True)
     if not isinstance(payload, dict):
-        return jsonify({"error": "invalid_json",
-                        "message": "Send a JSON object with content_id and reasoning."}), 400
+        return _refuse(payload, "invalid_json", "Send a JSON object with content_id and reasoning.")
 
     content_id = payload.get("content_id")
     reasoning = payload.get("reasoning")
 
     if not isinstance(content_id, str) or not content_id.strip():
-        return jsonify({"error": "invalid_content_id",
-                        "message": "content_id is required and must be a non-empty string."}), 400
+        return _refuse(payload, "invalid_content_id", "content_id is required and must be a non-empty string.")
     if not isinstance(reasoning, str) or not reasoning.strip():
-        return jsonify({"error": "invalid_reasoning",
-                        "message": "reasoning is required and must be a non-empty string."}), 400
+        return _refuse(payload, "invalid_reasoning", "reasoning is required and must be a non-empty string.")
 
     # The content_id has to exist, or the appeal would be recorded against nothing.
     original = audit.entries_for(content_id)
     if not original:
-        return jsonify({"error": "unknown_content_id",
-                        "message": "No submission found with that content_id."}), 404
+        return _refuse(payload, "unknown_content_id", "No submission found with that content_id.", 404)
 
     creator_id = original[0].get("creator_id")
     audit.log_appeal(content_id=content_id, creator_id=creator_id, reasoning=reasoning)

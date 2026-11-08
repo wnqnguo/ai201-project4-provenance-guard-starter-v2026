@@ -234,17 +234,13 @@ $ curl "http://127.0.0.1:5000/log?limit=4"
 
 ## Rate Limiting
 
-**My limits:** ___ per minute, ___ per day
+**My limits:** 5 per minute, 50 per day (`RATE_LIMIT_PER_MINUTE` and `RATE_LIMIT_PER_DAY` in `config.py`), on `POST /submit`.
 
 **Why those numbers and not others:**
-<!-- Think about two people: a real writer submitting their own work a few
-     times an hour, and a script sending a thousand variations to map your
-     thresholds. Your numbers have to be liveable for the first and hostile to
-     the second. -->
 
-**What a caller counts as:** <!-- per address, or per creator_id? They fail
-differently — one script can look like a thousand callers, and one household
-can look like one. -->
+A real writer submitting their own work, tweaking it and resubmitting, rarely sends more than a few in a minute or more than about twenty in a day, so 5 and 50 are liveable for them. A script trying to map my thresholds needs hundreds of small variations of one text. At 5 a minute it is slowed to a crawl, and at 50 a day it is cut off long before it has a useful picture of where the 0.35 and 0.65 lines sit. The starter's defaults (10 and 200) would have let that script send 200 probes a day. I did not go lower than 5 because each submission loads a model and takes a second or two, so a writer legitimately fixing a typo and resubmitting three times in a row should not be refused.
+
+**What a caller counts as:** The `creator_id` in the request body, falling back to the caller's address when the body has no usable `creator_id` (`rate_limit_key` in `app.py`). That makes the limit per writer, not per household. Its weakness is that a script can send a fresh `creator_id` with every request and never hit the limit, because I trust the ID the caller supplies. I did not fix that in this unit.
 
 **The run of status codes when I pushed past it:**
 
