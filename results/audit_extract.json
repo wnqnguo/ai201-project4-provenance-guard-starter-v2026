@@ -1,0 +1,556 @@
+[
+  {
+    "timestamp": "2026-11-08T23:52:05+00:00",
+    "content_id": "d585eb8b-d59b-4e50-9c08-06f83bd4f31b",
+    "creator_id": "attacker_EV01",
+    "guess": "human",
+    "model_score": 0.1635,
+    "style_score": 0.5644,
+    "combined_score": 0.3639,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:05+00:00",
+    "content_id": "ebf4b4df-dbc9-48ca-bb42-44362abb943e",
+    "creator_id": "attacker_EV02",
+    "guess": "human",
+    "model_score": 0.5943,
+    "style_score": 0.3187,
+    "combined_score": 0.4565,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:06+00:00",
+    "content_id": "6c1877cb-9335-4dd5-9328-3657737f1a27",
+    "creator_id": "attacker_EV03",
+    "guess": "ai",
+    "model_score": 0.6662,
+    "style_score": 0.4515,
+    "combined_score": 0.5589,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:06+00:00",
+    "content_id": "c854d90e-6ade-488d-aaf0-17ed991247f8",
+    "creator_id": "attacker_EV04",
+    "guess": "ai",
+    "model_score": 0.6114,
+    "style_score": 0.5593,
+    "combined_score": 0.5854,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:06+00:00",
+    "content_id": "1d8c7ff4-1aa0-4261-9840-eefdf4868230",
+    "creator_id": "attacker_EV05",
+    "guess": "human",
+    "model_score": 0.3212,
+    "style_score": 0.327,
+    "combined_score": 0.3241,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:06+00:00",
+    "content_id": "fb02b81b-05b8-4747-a696-a8a2bdb5255d",
+    "creator_id": "attacker_EV06",
+    "guess": "human",
+    "model_score": 0.5727,
+    "style_score": 0.3442,
+    "combined_score": 0.4585,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:07+00:00",
+    "content_id": "c480c0ab-02da-4c6e-a2fb-d8f6053a0b2e",
+    "creator_id": "attacker_EV07",
+    "guess": "human",
+    "model_score": 0.5862,
+    "style_score": 0.2423,
+    "combined_score": 0.4143,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:07+00:00",
+    "content_id": "e2dad5fe-8a2c-4627-8998-5c8e7c94aba7",
+    "creator_id": "attacker_EV08",
+    "guess": "human",
+    "model_score": 0.2452,
+    "style_score": 0.5488,
+    "combined_score": 0.397,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:07+00:00",
+    "content_id": "688a2225-d051-43b5-b021-ec9557b25bae",
+    "creator_id": "attacker_EV09",
+    "guess": "ai",
+    "model_score": 0.7042,
+    "style_score": 0.4228,
+    "combined_score": 0.5635,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:07+00:00",
+    "content_id": "15a396dc-1fa7-42f5-8e4d-780ebbd5ab99",
+    "creator_id": "attacker_EV10",
+    "guess": "ai",
+    "model_score": 0.9792,
+    "style_score": 0.729,
+    "combined_score": 0.8541,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:08+00:00",
+    "content_id": "24ab000d-696e-423f-adf0-bfa5331c2a7a",
+    "creator_id": "attacker_FP01",
+    "guess": "ai",
+    "model_score": 0.6175,
+    "style_score": 0.53,
+    "combined_score": 0.5737,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:08+00:00",
+    "content_id": "63c82c9a-7688-4ec0-9246-64c5705ebe2e",
+    "creator_id": "attacker_FP02",
+    "guess": "ai",
+    "model_score": 0.7387,
+    "style_score": 0.6338,
+    "combined_score": 0.6863,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:08+00:00",
+    "content_id": "ee8a99fe-2bff-4645-8a1c-8724e203ab97",
+    "creator_id": "attacker_FP03",
+    "guess": "ai",
+    "model_score": 0.8051,
+    "style_score": 0.6223,
+    "combined_score": 0.7137,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:08+00:00",
+    "content_id": "2e9cd46e-21c3-42ab-a46e-943cdd3f6ee5",
+    "creator_id": "attacker_FP04",
+    "guess": "ai",
+    "model_score": 0.8329,
+    "style_score": 0.5449,
+    "combined_score": 0.6889,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:08+00:00",
+    "content_id": "31ee40eb-e426-4b8b-9575-6abc3c73a873",
+    "creator_id": "attacker_FP05",
+    "guess": "ai",
+    "model_score": 0.8005,
+    "style_score": 0.6259,
+    "combined_score": 0.7132,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:09+00:00",
+    "content_id": "8ddf88e2-e3f9-45ed-930f-dc8d549b5fec",
+    "creator_id": "attacker_FP06",
+    "guess": "ai",
+    "model_score": 0.8814,
+    "style_score": 0.5042,
+    "combined_score": 0.6928,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:09+00:00",
+    "content_id": "7a854778-3e15-4496-938d-affcd1a091f9",
+    "creator_id": "attacker_FP07",
+    "guess": "ai",
+    "model_score": 0.8816,
+    "style_score": 0.4676,
+    "combined_score": 0.6746,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:09+00:00",
+    "content_id": "116a0ebd-7d3f-4377-8ad9-618cc4c456ca",
+    "creator_id": "attacker_FP08",
+    "guess": "human",
+    "model_score": 0.3223,
+    "style_score": 0.4862,
+    "combined_score": 0.4042,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:09+00:00",
+    "content_id": "eee99a32-e8e7-4838-b035-45eec5af915e",
+    "creator_id": "attacker_PI01",
+    "guess": "human",
+    "model_score": 0.4625,
+    "style_score": 0.4128,
+    "combined_score": 0.4376,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:09+00:00",
+    "content_id": "afa38c58-f237-4c17-9348-93ac0362e351",
+    "creator_id": "attacker_PI02",
+    "guess": "human",
+    "model_score": 0.2044,
+    "style_score": 0.3111,
+    "combined_score": 0.2577,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:09+00:00",
+    "content_id": "f4781d0e-6c93-477b-916f-6f98182b1909",
+    "creator_id": "attacker_PI03",
+    "guess": "ai",
+    "model_score": 0.5943,
+    "style_score": 0.5136,
+    "combined_score": 0.5539,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:09+00:00",
+    "content_id": "3ddebd80-49c9-40b8-ba82-efdebcd5c6e1",
+    "creator_id": "attacker_PI04",
+    "guess": "human",
+    "model_score": 0.4998,
+    "style_score": 0.46,
+    "combined_score": 0.4799,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:10+00:00",
+    "content_id": "7eea6e64-a85c-4253-a677-34a95c7d2afb",
+    "creator_id": "attacker_PI05",
+    "guess": "human",
+    "model_score": 0.6401,
+    "style_score": 0.148,
+    "combined_score": 0.3941,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:10+00:00",
+    "content_id": "f975d1b6-d093-44d2-9214-7d5eff5f7d56",
+    "creator_id": "attacker_PI06",
+    "guess": "ai",
+    "model_score": 0.5583,
+    "style_score": 0.5391,
+    "combined_score": 0.5487,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:10+00:00",
+    "creator_id": "attacker_MF01",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:10+00:00",
+    "content_id": "33131674-02f7-4ddf-b040-9ebcf7f05aee",
+    "creator_id": "attacker_MF03",
+    "guess": "human",
+    "model_score": 0.0,
+    "style_score": 0.5,
+    "combined_score": 0.25,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:10+00:00",
+    "content_id": "2e542fdb-15b6-494a-84d5-5485f568613f",
+    "creator_id": "attacker_MF04",
+    "guess": "human",
+    "model_score": 0.0112,
+    "style_score": 0.8333,
+    "combined_score": 0.4223,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:11+00:00",
+    "content_id": "627c83e2-a480-4123-8391-cd27869908a2",
+    "creator_id": "attacker_MF05",
+    "guess": "ai",
+    "model_score": 0.9976,
+    "style_score": 0.5,
+    "combined_score": 0.7488,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "content_id": "d3115739-0409-4188-98e6-1d2bc99ae9e6",
+    "creator_id": "attacker_MF06",
+    "guess": "ai",
+    "model_score": 0.9969,
+    "style_score": 0.8333,
+    "combined_score": 0.9151,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "content_id": "bee9fee8-bb97-475a-a5e5-e1a2186d6e18",
+    "creator_id": "attacker_MF07",
+    "guess": "ai",
+    "model_score": 0.9064,
+    "style_score": 0.8333,
+    "combined_score": 0.8699,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "attacker_MF08",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "text_too_long",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "attacker_RQ01",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "unknown",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_creator_id",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "attacker_RQ03",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "attacker_RQ04",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "attacker_RQ05",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "unknown",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_creator_id",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "unknown",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_json",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "unknown",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_json",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "unknown",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_json",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "unknown",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "unknown",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "creator_id": "attacker_RQ12",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status_code": 400
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "content_id": "8f822d70-c88d-4f4e-8578-9d19a4e01769",
+    "creator_id": "attacker_flood",
+    "guess": "human",
+    "model_score": 0.0287,
+    "style_score": 0.5,
+    "combined_score": 0.2643,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "content_id": "ed168135-2a3d-4621-9f6b-e6d595239bae",
+    "creator_id": "attacker_flood",
+    "guess": "human",
+    "model_score": 0.0287,
+    "style_score": 0.5,
+    "combined_score": 0.2643,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "content_id": "db9c73f2-827b-4bac-aa29-43ead7216bdc",
+    "creator_id": "attacker_flood",
+    "guess": "human",
+    "model_score": 0.0287,
+    "style_score": 0.5,
+    "combined_score": 0.2643,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:12+00:00",
+    "content_id": "7fadee71-60fb-4787-9a8c-a2a7c72733d7",
+    "creator_id": "attacker_flood",
+    "guess": "human",
+    "model_score": 0.0287,
+    "style_score": 0.5,
+    "combined_score": 0.2643,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "content_id": "c0bb869e-11e8-4f77-9028-6c2868a6b2df",
+    "creator_id": "attacker_flood",
+    "guess": "human",
+    "model_score": 0.0287,
+    "style_score": 0.5,
+    "combined_score": 0.2643,
+    "label": "This looks like it was written by a person.",
+    "status": "decided"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "creator_id": "attacker_flood",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "creator_id": "attacker_flood",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "creator_id": "attacker_flood",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "creator_id": "attacker_flood",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "creator_id": "attacker_flood",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "creator_id": "attacker_flood",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  },
+  {
+    "timestamp": "2026-11-08T23:52:13+00:00",
+    "creator_id": "attacker_flood",
+    "event": "rejected",
+    "status": "rejected",
+    "reason": "rate_limited",
+    "limit": "5 per 1 minute"
+  }
+]
