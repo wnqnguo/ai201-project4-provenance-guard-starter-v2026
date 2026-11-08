@@ -244,10 +244,16 @@ A real writer submitting their own work, tweaking it and resubmitting, rarely se
 
 **The run of status codes when I pushed past it:**
 
-<!-- python run_attacks.py --flood 15 -->
+`python run_attacks.py --flood 15`, 15 submissions from one `creator_id`, written to `results/flood_2026-11-08_1528.md`:
 
 ```
+200 200 200 200 200 429 429 429 429 429 429 429 429 429 429
+```
 
+Five went through and ten were refused, which is the limit of 5 per minute. The ten refusals are in `logs/audit.jsonl`, for example:
+
+```json
+{"timestamp": "2026-11-08T23:28:04+00:00", "creator_id": "flood_tester", "event": "rejected", "status": "rejected", "reason": "rate_limited", "limit": "5 per 1 minute"}
 ```
 
 ---
