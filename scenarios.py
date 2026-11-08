@@ -38,6 +38,18 @@ MINE = [
     "Etsy is a great platform for people who wants to test out starting their own business, it has a lot less learning curve n upfront cost compare to Amazon. It cost only $20 cents to post a listing on Etsy, where as on Amazon there is a monthly amazon fulfillment fee, and you have to pay for storage of your stock at Amazon warehouse. And due to way more sellers on amazon a lot from oversee factories who can offer very competitive price, it is much harder for individuals to start with a small amount of money.",
 ]
 
+# More of Faye's own writing, pasted from her own messages. Several are one
+# short sentence, which the style signal cannot measure (a one-sentence text has
+# no sentence spread), so they mostly test signal one.
+MINE_MORE = [
+    "So ngl I\u2019m not new to online business I had quite few Etsy stores..pendanteden is the true handmade but later only I did wholesale, drop shipping on Etsy had few other stores they all sold a lot at fast pace. In additional I experienced with Facebook ad n doing drop shipping on Shopify..for mostly an paintby number shop where I got a lot of orders but then I became too distracted kept on looking for the product without now what I had worked on Etsy, on Shopify I just had to be consistent..anyway ..things are more competitive now..n I\u2019m starting with stable n low cost handmade pendantedent shop like I shared in the other chat\u2026I\u2019m wondering what r some of the directions I can go in terms Etsy,( like such as selllinf more trending things that bring more profit, or selling on social media or even be an infleuencer to coach ppl on Etsy, or selling my own craft kits, etc that can bring more money..) this is longer term plan of course",
+    "Soft life: slow mornings, coffee, home, golden hour, trees around my condo",
+    "Day in my life: \u201810am on a Wednesday\u2019 style, ex-tech girl running her own shop.",
+    "ok which one we r posting later today tho",
+    "These videos r great thanks. Let\u2019s see how they perform. I\u2019m excited",
+    "No I\u2019m asking u which one to get from looking at the research Jesus.",
+]
+
 # Written by Claude (an AI), asked for typical plain AI prose on everyday topics.
 AI_WRITTEN = [
     "Technology has transformed the way people communicate in modern society. It offers many benefits, including faster access to information and improved connectivity. Social media platforms allow individuals to share ideas with a global audience. However, it also presents challenges, such as privacy concerns and misinformation. Overall, it is important to use technology responsibly and thoughtfully.",
@@ -60,12 +72,11 @@ AI_LOOSENED = [
 
 SCENARIOS = [
     # Criterion 1: of my own writing, at most 1 labeled high-confidence AI.
-    # NOTE: the criterion says 10 pieces; only the pieces Faye has actually
-    # written are here. Add more of her own before the final run.
+    # 11 pieces, all Faye's own writing (MINE + MINE_MORE).
     {
         "name": "my own writing",
         "criterion": 1,
-        "texts": MINE,
+        "texts": MINE + MINE_MORE,
     },
     # Criterion 2: average combined score of AI-written text is at least 0.3
     # higher than the average for my own writing. Compare these two groups.
