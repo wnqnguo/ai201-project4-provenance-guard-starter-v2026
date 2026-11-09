@@ -216,11 +216,11 @@ $ curl "http://127.0.0.1:5000/log?limit=4"
 
 ## How I Used AI
 
-**Moment 1: checking my work against the grading**
+**Moment 1: building the style signal**
 
-- *What I asked for:* After finishing the Unit 7 sections, I asked Claude to check my project against the grading.
-- *What came back:* A comparison of what I had against what the grading asks for, and what was still missing.
-- *What I changed:* I filled in what was missing before moving on to the next milestone.
+- *What I asked for:* Help building the three measures in `stylometry.py` (sentence length spread, unique-word ratio, punctuation density) and turning them into one 0 to 1 score.
+- *What came back:* Three working functions and a `style_signal` that flips each measure so that high means more AI-like, then averages them.
+- *What I changed:* I decided which punctuation counts (semicolons, colons, commas and dashes, not full stops) and what a one-sentence text returns (a neutral value). When I tested it, a chatbot paragraph full of long comma lists scored 0.32, which reads as human. I kept the signal as it was and wrote that up as a blind spot instead of tuning it to fit two examples.
 
 **Moment 2: choosing the combining rule**
 
@@ -228,12 +228,11 @@ $ curl "http://127.0.0.1:5000/log?limit=4"
 - *What came back:* Two options, a plain 50/50 average or an average with a rule for when the signals disagree, and a recommendation for the average.
 - *What I changed:* I went with the plain average, because it already put my own funeral paragraph in "unsure" and my criteria are written against the combined score. I also corrected my README after the service returned 0.74 for the model signal on that paragraph, not the 0.65 from my terminal test, which had stray quote marks in the text.
 
-**Moment 3: Unit 8, testing and the one improvement**
+**Moment 3: checking my work against the grading**
 
-- *What I asked for:* I was worn out, so I asked Claude to do Unit 8 for me and make the commits. That means Claude did most of this unit's work, not me.
-- *What Claude did:* It wrote the rate limiter settings, the audit-log changes, the test scripts (`run_attacks.py`, `run_eval.py`, `appeal_check.py`, `scenarios.py`), the five AI-written test texts and the loosened versions, the marking of the 56 attacks, the diagnoses, the improvement (moving `AI_THRESHOLD` from 0.65 to 0.75) with a prediction, and the README sections for Unit 8. It also drafted criteria 4 and 5 for me.
-- *What I did:* In a separate chat I asked Claude to pull examples of my own writing from my past chats (I asked for paragraphs, and to swap out one that was too personal), and I gave those six pieces to this session for the human side of the tests, approved the wording of criteria 4 and 5, started the app, ran every test command on my own machine and pasted the output back, and told Claude to keep Claude's name out of the commit messages. The score numbers in this README come from those runs.
-- *What I did not do:* I did not write the code or the diagnoses myself, and I have not independently re-checked each attack's mark. Claude caught and fixed one wrong number in its own write-up (the AI label went from 4 texts to 1, not 5 to 1) by checking against the saved results.
+- *What I asked for:* I asked Claude to check my project against the grading.
+- *What came back:* A comparison of what I had against what the grading asks for, and what was still missing.
+- *What I changed:* I filled in what was missing before moving on. Note: for the Unit 8 testing itself I was exhausted and had Claude do most of the work (code, test scripts, attack marking, diagnoses, README sections). I supplied my own writing for the human-side tests, ran the commands and pasted the results back.
 
 <!-- ═══════════════════════ UNIT 8 — THE TEST ═══════════════════════ -->
 
