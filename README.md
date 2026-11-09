@@ -232,7 +232,13 @@ $ curl "http://127.0.0.1:5000/log?limit=4"
 
 - *What I asked for:* I asked Claude to check my project against the grading.
 - *What came back:* A comparison of what I had against what the grading asks for, and what was still missing.
-- *What I changed:* I filled in what was missing before moving on. Note: for the Unit 8 testing itself I was exhausted and had Claude do most of the work (code, test scripts, attack marking, diagnoses, README sections). I supplied my own writing for the human-side tests, ran the commands and pasted the results back.
+- *What I changed:* I filled in what was missing before moving on. 
+
+**Moment 4: finding my own writing for the tests**
+
+- *What I asked for:* In a separate chat, I asked Claude to pull five examples of my own writing from my past chats, as paragraphs, to use as the human-written texts in my tests.
+- *What came back:* Five pieces taken from my chats. 
+- *What I changed:* One of the pieces was too personal, so I asked for it to be replaced with a paragraph about my more generic stuff. I then gave the pieces to this session to use as the human side of the tests.
 
 <!-- ═══════════════════════ UNIT 8 — THE TEST ═══════════════════════ -->
 
