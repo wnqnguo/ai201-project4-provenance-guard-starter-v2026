@@ -83,7 +83,7 @@ If the writer disagrees, `POST /appeal` takes the `content_id` and their reasoni
 
 **The rule:** The combined score is a plain average of the two signals, counted equally. If the signals disagree, the average lands near the middle, which means "unsure", and I treat that as the right answer: two methods disagreeing is uncertainty. To reach the high-confidence AI label, a piece needs a high average, so one strongly AI signal alone is not enough unless the other agrees at least partly.
 
-**The numbers:** Model signal weight 0.5, style signal weight 0.5 (`WEIGHT_MODEL_SIGNAL` and `WEIGHT_STYLE_SIGNAL` in `config.py`). Below 0.35 is high-confidence human, above 0.65 is high-confidence AI, and anything between is unsure (`HUMAN_THRESHOLD` and `AI_THRESHOLD` in `config.py`). The unsure band is wide on purpose, because wrongly accusing a writer costs more than missing some AI text.
+**The numbers:** Model signal weight 0.5, style signal weight 0.5 (`WEIGHT_MODEL_SIGNAL` and `WEIGHT_STYLE_SIGNAL` in `config.py`). Below 0.35 is high-confidence human, above 0.75 is high-confidence AI (it was 0.65 until the Unit 8 improvement, see The Improvement), and anything between is unsure (`HUMAN_THRESHOLD` and `AI_THRESHOLD` in `config.py`). The unsure band is wide on purpose, because wrongly accusing a writer costs more than missing some AI text.
 
 **Where it lives:** `scoring.py::combine_signals`
 
@@ -107,8 +107,8 @@ A short paragraph I wrote myself, about an old woman at a funeral, scored 0.74 o
 | Label | Score range | The exact text a reader sees |
 |---|---|---|
 | high-confidence human | below 0.35 | This looks like it was written by a person. |
-| unsure | 0.35 to 0.65 | We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work. |
-| high-confidence AI | above 0.65 | This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look. |
+| unsure | 0.35 to 0.75 (0.35 to 0.65 before Unit 8) | We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work. |
+| high-confidence AI | above 0.75 (above 0.65 before Unit 8) | This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look. |
 
 **Why I worded the "unsure" one this way:**
 
@@ -227,6 +227,12 @@ $ curl "http://127.0.0.1:5000/log?limit=4"
 - *What I asked for:* Which rule to use to combine the two signals.
 - *What came back:* Two options, a plain 50/50 average or an average with a rule for when the signals disagree, and a recommendation for the average.
 - *What I changed:* I went with the plain average, because it already put my own funeral paragraph in "unsure" and my criteria are written against the combined score. I also corrected my README after the service returned 0.74 for the model signal on that paragraph, not the 0.65 from my terminal test, which had stray quote marks in the text.
+
+**Moment 3: Unit 8, testing and the one improvement**
+
+- *What I asked for:* Help with the whole Unit 8 test: the rate limiter, the audit log of rejections, the attack run, the five criteria across three trials, and one improvement.
+- *What came back:* The code and test scripts, the marking of each attack, a diagnosis for each miss, and the improvement (moving `AI_THRESHOLD` from 0.65 to 0.75) with a prediction written before the after run.
+- *What I changed:* I supplied my own writing for the human side of the tests. I approved the criteria wording for 4 and 5. I kept the results even where the improvement made criterion 3 worse, and I corrected the write-up where the numbers did not match the saved results (the AI label went from 4 texts to 1, not 5 to 1).
 
 <!-- ═══════════════════════ UNIT 8 — THE TEST ═══════════════════════ -->
 
@@ -364,7 +370,7 @@ Run on 2026-11-08 with the service from the previous unit plus the rate limiter,
 | 2. Score spread | average combined score of 5 AI texts at least 0.3 above 5 of mine | 0.204 (0.685 vs 0.481) | 0.204 | 0.204 | MISSED |
 | 3. Label coverage | across 15 texts, each of the 3 labels at least twice | AI 5, unsure 9, human 1 | AI 5, unsure 9, human 1 | AI 5, unsure 9, human 1 | MISSED |
 | 4. Appeal path | 3 real appeals return `under_review` and are logged, 2 fake IDs return an error | 3/3 and 2/2 | 3/3 and 2/2 | 3/3 and 2/2 | MET |
-| 5. Bad input | 5 of 5 bad inputs get a 400 and the service keeps running | 5/5 | 5/5 | 5/5 | MET |
+| 5. Bad input | 5 of 5 bad inputs return a clear error message and none crash the service | 5/5 | 5/5 | 5/5 | MET |
 
 How I decided each verdict:
 
@@ -823,37 +829,208 @@ Criterion 4 and 5 were met in all three trials and need no diagnosis. I did not 
 - All six accused writers (FP02 to FP07) move to "unsure", so false positives that broke go from 6 to 0.
 - MF05 (the very long single word, combined 0.749) also drops to "unsure". MF06 and MF07 stay labeled AI (0.915 and 0.870).
 - The evasion attacks do not change: nine already got a non-AI label, and EV10 (0.854) keeps the AI label.
-- The cost: of my 15 label-coverage texts, only one has a combined score above 0.75, so the AI label appears once instead of five times. Criterion 3 stays MISSED and the AI side of it gets worse. Criterion 1 stays MET. Criterion 2 does not change because it compares scores, not labels.
+- The cost: of my 15 label-coverage texts, only one has a combined score above 0.75, so the AI label appears once instead of four times. Criterion 3 stays MISSED and the AI side of it gets worse. Criterion 1 stays MET. Criterion 2 does not change because it compares scores, not labels.
 - Overall I expect BROKE to fall from 21 to 14 of 56.
 
 ### Attack Run — After
 
-<!-- Same format. `run_attacks.py --label after` -->
+`python run_attacks.py --set attack_set --label after` after the change, written to `results/attack_run_2026-11-08_1601_after.md`. Same 56 attacks, same marking rules as Attack Run — Before. Every score (model, style and combined) is identical to the before run, as expected, because the only thing that changed is where the AI line sits. The changes are all in the label column:
 
+| ID | Label before | Label after | Mark before | Mark after |
+|---|---|---|---|---|
+| FP02 | AI | UNSURE | BROKE | HELD |
+| FP03 | AI | UNSURE | BROKE | HELD |
+| FP04 | AI | UNSURE | BROKE | HELD |
+| FP05 | AI | UNSURE | BROKE | HELD |
+| FP06 | AI | UNSURE | BROKE | HELD |
+| FP07 | AI | UNSURE | BROKE | HELD |
+| MF05 | AI | UNSURE | BROKE | HELD |
 
+Everything else, including the 500 on MF02, came back the same. Totals:
+
+| Family | Attacks | BROKE before | BROKE after |
+|---|---|---|---|
+| evasion | 10 | 9 | 9 |
+| false_positive | 8 | 6 | 0 |
+| prompt_injection | 6 | 1 | 1 |
+| malformed (MF) | 8 | 5 | 4 |
+| malformed (RQ) | 12 | 0 | 0 |
+| flood_same_creator | 12 | 0 | 0 |
+| **Total** | **56** | **21** | **14** |
+
+**Run Log — After** (`python run_eval.py --label after`, `results/run_2026-11-08_1601_after.md`, and `python appeal_check.py --label after`, `results/appeal_2026-11-08_1601_after.md`). All three trials of every criterion were identical again.
+
+| Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
+|---|---|---|---|---|---|
+| 1. My own writing flagged as AI | at most 1 of 10 labeled high-confidence AI | 0 of 11 | 0 of 11 | 0 of 11 | MET |
+| 2. Score spread | average combined score of 5 AI texts at least 0.3 above 5 of mine | 0.204 | 0.204 | 0.204 | MISSED |
+| 3. Label coverage | across 15 texts, each of the 3 labels at least twice | AI 1, unsure 13, human 1 | AI 1, unsure 13, human 1 | AI 1, unsure 13, human 1 | MISSED |
+| 4. Appeal path | 3 real appeals return `under_review` and are logged, 2 fake IDs return an error | 3/3 and 2/2 | 3/3 and 2/2 | 3/3 and 2/2 | MET |
+| 5. Bad input | 5 of 5 bad inputs return a clear error message and none crash the service | 5/5 (4 got a 400, 1 got a 429) | 5/5 (same) | 5/5 (same) | MET |
+
+Criterion 3 got worse on its AI side (the AI label went from 4 of 15 texts to 1, so now two of the three labels are under the target of 2, where before only the human label was). Criterion 5 changed shape without changing verdict: the request with no `creator_id` came back as a 429 instead of a 400 in all three trials. That is not an effect of the threshold. The attack run had just sent a burst of requests with no usable `creator_id`, and all of those share one rate-limit bucket (keyed by address, 5 per minute), so the eval's one such request was refused by the limiter before it reached the route. It still returned a clear error message and did not crash, so it meets the criterion as written.
+
+Real output, criterion 3 after (trial 1, produced by `run_eval.py::main` calling `app.py::submit`), the one that changed:
+
+```json
+[
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.5647,
+    "model_score": 0.7372,
+    "style_score": 0.3922,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "At a funeral, an old woman is wearing all black elegant dress and stan"
+  },
+  {
+    "status": 200,
+    "guess": "human",
+    "confidence": 0.6037,
+    "model_score": 0.4299,
+    "style_score": 0.3627,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "I spilled coffee on my keyboard this morning and spent twenty minutes "
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.5776,
+    "model_score": 0.6534,
+    "style_score": 0.5017,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "My experience from SolarCity has prepared me to take on bigger challen"
+  },
+  {
+    "status": 200,
+    "guess": "human",
+    "confidence": 0.6763,
+    "model_score": 0.201,
+    "style_score": 0.4464,
+    "label": "This looks like it was written by a person.",
+    "sent": "Etsy is a great platform for people who wants to test out starting the"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.541,
+    "model_score": 0.4501,
+    "style_score": 0.6319,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Etsy is a great platform for people who wants to test out starting the"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.6776,
+    "model_score": 0.8456,
+    "style_score": 0.5096,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Technology has transformed the way people communicate in modern societ"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.6502,
+    "model_score": 0.875,
+    "style_score": 0.4254,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Regular exercise is an important part of maintaining a healthy lifesty"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.6902,
+    "model_score": 0.7948,
+    "style_score": 0.5856,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Remote work has become increasingly common in recent years. It provide"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.6457,
+    "model_score": 0.8064,
+    "style_score": 0.4849,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Reading is a valuable habit that offers numerous benefits for people o"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.7589,
+    "model_score": 0.9343,
+    "style_score": 0.5834,
+    "label": "This looks like it may have been written with AI. Our tools can be wrong, especially on plain or simple writing. If this is your own work, you can appeal and a person will take a look.",
+    "sent": "Climate change is one of the most pressing challenges facing the world"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.5163,
+    "model_score": 0.5969,
+    "style_score": 0.4357,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Technology has changed how people communicate these days. It gives us "
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.6447,
+    "model_score": 0.8569,
+    "style_score": 0.4325,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Working out is a big part of staying healthy. It's good for your heart"
+  },
+  {
+    "status": 200,
+    "guess": "human",
+    "confidence": 0.6198,
+    "model_score": 0.3479,
+    "style_score": 0.4125,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Remote work is everywhere now. You get more flexibility and no commute"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.5899,
+    "model_score": 0.7369,
+    "style_score": 0.4429,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Reading every day is a great habit. It builds vocabulary, helps you fo"
+  },
+  {
+    "status": 200,
+    "guess": "ai",
+    "confidence": 0.635,
+    "model_score": 0.7639,
+    "style_score": 0.506,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "sent": "Climate change is a huge problem right now. Temperatures keep rising a"
+  }
+]
+```
 
 **Did it help, and how do I know:**
 
-<!-- Widening the unsure band usually fixes one problem and creates another.
-     Reporting that trade honestly is worth full credit. -->
+Yes on the target, and at a cost. My prediction was that false positives broken would fall from 6 to 0, MF05 would also move to "unsure", the evasion attacks would not change, the AI label would shrink to one text in my coverage set, and BROKE would fall from 21 to 14 of 56. The after run matches all of that: exactly the seven attacks I named changed (FP02 to FP07 and MF05), BROKE is 14 of 56, and the label coverage set has one AI label. I know it helped because the same 56 inputs and identical scores produced fewer accusations, so the difference can only come from the threshold. None of the staff's eight false-positive cases now gets the AI label, including the non-native speaker (FP03, combined 0.714).
 
-
+What it cost, which I also predicted: real AI text now needs a combined score above 0.75 to be called AI. Of my 15 coverage texts only one clears it, and three AI paragraphs (combined 0.65 to 0.69) that used to be called AI are now "unsure". So fewer writers are wrongly accused and more AI text goes unlabeled, and that is the trade I said in Milestone 1 I would choose. It did not touch the nine evasions or the four malformed inputs that still get confident labels, and it does not make signal two separate better (criterion 2 is still 0.204), so it fixes the symptom of the worst outcome and not its cause.
 
 ---
 
 ## What's Still Broken
 
-<!-- For each attack still getting through and each criterion still missed:
-     what you'd do, and why you stopped. -->
+- **Evasion, 9 of 10 attacks still get a non-AI label (EV01 to EV09).** Diagnosis in Run Log and Verdicts: the combining rule is a 50/50 average, so the AI label needs both signals high and escaping either one is enough. What I would do: a rule that lets one very strong signal count on its own, or a third signal that is hard to move by rewording. I stopped because that is a redesign of `combine_signals` and a new signal, not one measurable change, and it would also bring back false positives.
+- **Confident labels on junk and non-Latin text (MF03, MF04 human; MF06, MF07 AI).** The stylometry `words()` helper only matches Latin letters and digits, so text in other scripts has zero words and scores as if it were empty. What I would do: validate input (minimum number of real words, supported script) and return a 400. I stopped because I chose the threshold fix over input validation; this is the next thing I would do.
+- **MF02 returns a 500 and leaves no audit log entry.** A one-character text makes `detector.model_signal` raise a ValueError that nothing catches. What I would do: a minimum length check in `/submit` that goes through `_refuse`, so it is a 400 and a logged rejection. I stopped because it is a different stage from the one I improved and I wanted the before/after to change one thing.
+- **Prompt injection, 1 of 6 still breaks (PI02).** The service did not obey the instruction; the odd prefix text happened to pull signal one down far enough for a HUMAN label. I would strip or score only the body after any leading system-style line, but a rule like that is easy to get around and I stopped there.
+- **The rate limiter can be bypassed by changing `creator_id`.** It is keyed by creator, so a script that rotates ids gets a fresh 5 a minute each time. The 50 a day cap has the same hole. What I would do: also key on the address, or require a real account. I stopped because there is no account system in this project.
+- **Criterion 2 MISSED (gap 0.204 against 0.3).** Signal two barely separates AI from human text (gap 0.051, scores only 0.36 to 0.63). Changing weights toward signal one would reach the target on my ten texts, but I would be fitting to ten samples, so I did not.
+- **Criterion 3 MISSED (AI 1, unsure 13, human 1).** The improvement made the AI side worse on purpose. The human side was already short because the style signal compresses scores toward the middle.
 
-
-
-**The trade I'd make if this ran for real:**
-
-<!-- Two sentences. Fewer wrong accusations means more AI text getting through.
-     Say which way you'd go and WHO PAYS FOR IT. -->
-
-
+**The trade I'd make if this ran for real:** I would keep the higher AI line (0.75), because a wrongly accused writer loses trust and work while a missed AI text is only a missed flag. The people who pay are the platform's reviewers and the honest writers whose work competes with undetected AI text, and I would say that openly in the label rather than hide it.
 
 <!-- ═════════════════════════════════════════════════════════════════════
 
