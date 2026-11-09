@@ -216,11 +216,11 @@ $ curl "http://127.0.0.1:5000/log?limit=4"
 
 ## How I Used AI
 
-**Moment 1: building the style signal**
+**Moment 1: checking my work against the grading**
 
-- *What I asked for:* Help building the three measures in `stylometry.py` (sentence length spread, unique-word ratio, punctuation density) and turning them into one 0 to 1 score.
-- *What came back:* Three working functions and a `style_signal` that flips each measure so that high means more AI-like, then averages them.
-- *What I changed:* I decided which punctuation counts (semicolons, colons, commas and dashes, not full stops) and what a one-sentence text returns (a neutral value). When I tested it, a chatbot paragraph full of long comma lists scored 0.32, which reads as human. I kept the signal as it was and wrote that up as a blind spot instead of tuning it to fit two examples.
+- *What I asked for:* After finishing the Unit 7 sections, I asked Claude to check my project against the grading.
+- *What came back:* A comparison of what I had against what the grading asks for, and what was still missing.
+- *What I changed:* I filled in what was missing before moving on to the next milestone.
 
 **Moment 2: choosing the combining rule**
 
