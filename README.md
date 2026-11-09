@@ -230,9 +230,10 @@ $ curl "http://127.0.0.1:5000/log?limit=4"
 
 **Moment 3: Unit 8, testing and the one improvement**
 
-- *What I asked for:* Help with the whole Unit 8 test: the rate limiter, the audit log of rejections, the attack run, the five criteria across three trials, and one improvement.
-- *What came back:* The code and test scripts, the marking of each attack, a diagnosis for each miss, and the improvement (moving `AI_THRESHOLD` from 0.65 to 0.75) with a prediction written before the after run.
-- *What I changed:* I supplied my own writing for the human side of the tests. I approved the criteria wording for 4 and 5. I kept the results even where the improvement made criterion 3 worse, and I corrected the write-up where the numbers did not match the saved results (the AI label went from 4 texts to 1, not 5 to 1).
+- *What I asked for:* I was worn out, so I asked Claude to do Unit 8 for me and make the commits. That means Claude did most of this unit's work, not me.
+- *What Claude did:* It wrote the rate limiter settings, the audit-log changes, the test scripts (`run_attacks.py`, `run_eval.py`, `appeal_check.py`, `scenarios.py`), the five AI-written test texts and the loosened versions, the marking of the 56 attacks, the diagnoses, the improvement (moving `AI_THRESHOLD` from 0.65 to 0.75) with a prediction, and the README sections for Unit 8. It also drafted criteria 4 and 5 for me.
+- *What I did:* I gave Claude six pieces of my own writing for the human side of the tests, approved the wording of criteria 4 and 5, started the app, ran every test command on my own machine and pasted the output back, and told Claude to keep Claude's name out of the commit messages. The score numbers in this README come from those runs.
+- *What I did not do:* I did not write the code or the diagnoses myself, and I have not independently re-checked each attack's mark. Claude caught and fixed one wrong number in its own write-up (the AI label went from 4 texts to 1, not 5 to 1) by checking against the saved results.
 
 <!-- ═══════════════════════ UNIT 8 — THE TEST ═══════════════════════ -->
 
