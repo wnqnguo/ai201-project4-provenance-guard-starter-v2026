@@ -1,0 +1,2678 @@
+[
+ {
+  "trial": 1,
+  "c1": [
+   12,
+   12
+  ],
+  "c2": [
+   0,
+   10
+  ],
+  "c3": [
+   9,
+   22
+  ],
+  "c4": [
+   10,
+   10
+  ],
+  "c5": [
+   10,
+   10
+  ],
+  "durations_ms": [
+   107.6,
+   80.8,
+   196.2,
+   75.1,
+   170.9,
+   390.2,
+   69.3,
+   67.8,
+   66.2,
+   67.5
+  ],
+  "sent": [
+   {
+    "group": "bad",
+    "id": "MF01",
+    "note": "text is only whitespace",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF02",
+    "note": "text is a single character",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 1)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF03",
+    "note": "text is control characters",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 3)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF04",
+    "note": "text is only punctuation",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF05",
+    "note": "text is a very long single word",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 1)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF06",
+    "note": "text is emoji only",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF07",
+    "note": "text is right-to-left script",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF08",
+    "note": "text is 60,000 characters",
+    "status": 400,
+    "payload": {
+     "error": "text_too_long",
+     "message": "text must be 20000 characters or fewer."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW1",
+    "note": "missing text field",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW2",
+    "note": "text is a number",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW3",
+    "note": "broken JSON",
+    "status": 400,
+    "payload": {
+     "error": "invalid_json",
+     "message": "Send a JSON object with text and creator_id."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW4",
+    "note": "nine-word sentence",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 9)."
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR1",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6651,
+     "content_id": "e4c6d579-904e-4436-8cac-7e62077e937d",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.2642,
+     "style_score": 0.4056
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR2",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5752,
+     "content_id": "23abeed9-e14b-49f9-b637-83588508e6fe",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3328,
+     "style_score": 0.5167
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR3",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7243,
+     "content_id": "40e1a337-f4ea-44b6-b8cf-0523923ee842",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.1685,
+     "style_score": 0.383
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR4",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6184,
+     "content_id": "05c91065-fa11-4d23-8be2-2707dd7322bc",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4021,
+     "style_score": 0.3611
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR5",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5789,
+     "content_id": "2ea7b512-813f-4b6c-b384-9ec6bd1fb711",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3237,
+     "style_score": 0.5185
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES1",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6806,
+     "content_id": "a20d437f-d098-4c3a-b4f6-1ef453d534cc",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.1055,
+     "style_score": 0.5333
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES2",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5716,
+     "content_id": "b78f894b-f35a-4c72-bff9-02cb4db3c391",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3133,
+     "style_score": 0.5435
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES3",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6962,
+     "content_id": "6d3d5768-3f5c-402e-89bd-7cf63d10e6fb",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.202,
+     "style_score": 0.4056
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES4",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6124,
+     "content_id": "04852b50-ffba-454d-a1ea-7feaa80003f4",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.2752,
+     "style_score": 0.5
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES5",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6186,
+     "content_id": "50ad8245-13b5-453c-94b2-688aa60f9dd2",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.2277,
+     "style_score": 0.5351
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N1",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5647,
+     "content_id": "8b7c0dde-79f0-42ed-aabe-2b4a5957fd21",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.7372,
+     "style_score": 0.3922
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N2",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6037,
+     "content_id": "7d8f37c2-0999-41df-b856-3c19689b97bd",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4299,
+     "style_score": 0.3627
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N3",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5776,
+     "content_id": "1e382006-a077-46c6-8902-cb9ac40eaf5d",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.6534,
+     "style_score": 0.5017
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N4",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6763,
+     "content_id": "3ddf75eb-86cc-4b3f-80d8-f6812b492098",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.201,
+     "style_score": 0.4464
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N5",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.541,
+     "content_id": "2061daa6-e0f3-47e2-9e78-482cb8653a8d",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4501,
+     "style_score": 0.6319
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N6",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7514,
+     "content_id": "fe892e43-330b-44b9-aa01-20c3616ad8db",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0985,
+     "style_score": 0.3988
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N7",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.9044,
+     "content_id": "e08e7ada-35e6-4d4a-9fec-5f069992ba47",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0246,
+     "style_score": 0.1667
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N8",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.8625,
+     "content_id": "cca79cdb-be2b-4d6c-973a-4a1278a4a078",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0527,
+     "style_score": 0.2222
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N9",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7002,
+     "content_id": "446b4231-5616-49a0-a1f7-268d75082547",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0692,
+     "style_score": 0.5303
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N10",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7385,
+     "content_id": "d5b175ed-02b0-4bec-85ee-7c0c818ce3ac",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0229,
+     "style_score": 0.5
+    }
+   }
+  ],
+  "new_log_entries": [
+   {
+    "creator_id": "cap_t1_MF01",
+    "duration_ms": 0.7,
+    "event": "rejected",
+    "input": "     \n\n   \t  ",
+    "input_chars": 13,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_MF02",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "a",
+    "input_chars": 1,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_MF03",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "\u0001\u0002 test \u001b[31mred\u001b[0m",
+    "input_chars": 20,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_MF04",
+    "duration_ms": 0.6,
+    "event": "rejected",
+    "input": "!!! ??? ... ,,, ;;; --- ((( )))",
+    "input_chars": 31,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_MF05",
+    "duration_ms": 0.4,
+    "event": "rejected",
+    "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "input_chars": 4000,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_MF06",
+    "duration_ms": 0.4,
+    "event": "rejected",
+    "input": "🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣",
+    "input_chars": 200,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_MF07",
+    "duration_ms": 0.7,
+    "event": "rejected",
+    "input": "هذا نص باللغة العربية لاختبار كيفية تعامل النظام مع النصوص التي لا تستخدم الأبجدية اللاتينية على الإطلاق.",
+    "input_chars": 105,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_MF08",
+    "duration_ms": 0.5,
+    "event": "rejected",
+    "input": "We got to the campsite about four. The pitch was fine, a bit sloped, but there was a tap nearby and the toilets were clean enough. Putting the tent up took longer than it should have because I had for",
+    "input_chars": 57640,
+    "reason": "text_too_long",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_NEW1",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_NEW2",
+    "duration_ms": 0.5,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "unknown",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_json",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "creator_id": "cap_t1_NEW4",
+    "duration_ms": 0.6,
+    "event": "rejected",
+    "input": "I walked to the coffee shop this morning today.",
+    "input_chars": 47,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.3349,
+    "content_id": "e4c6d579-904e-4436-8cac-7e62077e937d",
+    "creator_id": "cap_t1_FR1",
+    "duration_ms": 86.3,
+    "guess": "human",
+    "input": "Hier soir, nous avons préparé un grand dîner pour toute la famille avant de regarder un film ensemble.",
+    "input_chars": 102,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.2642,
+    "status": "decided",
+    "style_score": 0.4056,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.4248,
+    "content_id": "23abeed9-e14b-49f9-b637-83588508e6fe",
+    "creator_id": "cap_t1_FR2",
+    "duration_ms": 81.2,
+    "guess": "human",
+    "input": "Ma sœur habite à Lyon depuis trois ans et elle travaille dans une petite librairie près de la gare.",
+    "input_chars": 99,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3328,
+    "status": "decided",
+    "style_score": 0.5167,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.2757,
+    "content_id": "40e1a337-f4ea-44b6-b8cf-0523923ee842",
+    "creator_id": "cap_t1_FR3",
+    "duration_ms": 73.3,
+    "guess": "human",
+    "input": "Je voudrais réserver une table pour quatre personnes samedi soir, si possible près de la fenêtre.",
+    "input_chars": 97,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.1685,
+    "status": "decided",
+    "style_score": 0.383,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.3816,
+    "content_id": "05c91065-fa11-4d23-8be2-2707dd7322bc",
+    "creator_id": "cap_t1_FR4",
+    "duration_ms": 73.0,
+    "guess": "human",
+    "input": "Le matin, j'aime boire un café chaud en lisant les nouvelles avant de partir au travail.",
+    "input_chars": 88,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4021,
+    "status": "decided",
+    "style_score": 0.3611,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.4211,
+    "content_id": "2ea7b512-813f-4b6c-b384-9ec6bd1fb711",
+    "creator_id": "cap_t1_FR5",
+    "duration_ms": 91.9,
+    "guess": "human",
+    "input": "Nous avons visité le musée dimanche dernier et les enfants ont adoré les tableaux de couleurs vives.",
+    "input_chars": 100,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3237,
+    "status": "decided",
+    "style_score": 0.5185,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.3194,
+    "content_id": "a20d437f-d098-4c3a-b4f6-1ef453d534cc",
+    "creator_id": "cap_t1_ES1",
+    "duration_ms": 106.6,
+    "guess": "human",
+    "input": "Ayer por la tarde fuimos al mercado a comprar frutas frescas y verduras para la cena de toda la familia.",
+    "input_chars": 104,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.1055,
+    "status": "decided",
+    "style_score": 0.5333,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.4284,
+    "content_id": "b78f894b-f35a-4c72-bff9-02cb4db3c391",
+    "creator_id": "cap_t1_ES2",
+    "duration_ms": 80.9,
+    "guess": "human",
+    "input": "Mi hermana vive en Madrid desde hace tres años y trabaja en una pequeña librería cerca de la estación.",
+    "input_chars": 102,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3133,
+    "status": "decided",
+    "style_score": 0.5435,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.3038,
+    "content_id": "6d3d5768-3f5c-402e-89bd-7cf63d10e6fb",
+    "creator_id": "cap_t1_ES3",
+    "duration_ms": 74.5,
+    "guess": "human",
+    "input": "Quisiera reservar una mesa para cuatro personas el sábado por la noche, si es posible junto a la ventana.",
+    "input_chars": 105,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.202,
+    "status": "decided",
+    "style_score": 0.4056,
+    "timestamp": "2026-11-15T22:35:58+00:00"
+   },
+   {
+    "combined_score": 0.3876,
+    "content_id": "04852b50-ffba-454d-a1ea-7feaa80003f4",
+    "creator_id": "cap_t1_ES4",
+    "duration_ms": 75.8,
+    "guess": "human",
+    "input": "Por la mañana me gusta tomar un café caliente mientras leo las noticias antes de ir a trabajar.",
+    "input_chars": 95,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.2752,
+    "status": "decided",
+    "style_score": 0.5,
+    "timestamp": "2026-11-15T22:35:59+00:00"
+   },
+   {
+    "combined_score": 0.3814,
+    "content_id": "50ad8245-13b5-453c-94b2-688aa60f9dd2",
+    "creator_id": "cap_t1_ES5",
+    "duration_ms": 74.5,
+    "guess": "human",
+    "input": "Visitamos el museo el domingo pasado y a los niños les encantaron los cuadros de colores muy vivos.",
+    "input_chars": 99,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.2277,
+    "status": "decided",
+    "style_score": 0.5351,
+    "timestamp": "2026-11-15T22:35:59+00:00"
+   },
+   {
+    "combined_score": 0.5647,
+    "content_id": "8b7c0dde-79f0-42ed-aabe-2b4a5957fd21",
+    "creator_id": "cap_t1_N1",
+    "duration_ms": 107.6,
+    "guess": "ai",
+    "input": "At a funeral, an old woman is wearing all black elegant dress and standing far away from the rest of the people. Lots of people are crying at the funeral. But not the old woman. She looks peaceful, ev",
+    "input_chars": 247,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.7372,
+    "status": "decided",
+    "style_score": 0.3922,
+    "timestamp": "2026-11-15T22:35:59+00:00"
+   },
+   {
+    "combined_score": 0.3963,
+    "content_id": "7d8f37c2-0999-41df-b856-3c19689b97bd",
+    "creator_id": "cap_t1_N2",
+    "duration_ms": 80.8,
+    "guess": "human",
+    "input": "I spilled coffee on my keyboard this morning and spent twenty minutes drying it with a hairdryer while my cat watched from the couch like I was an idiot. The N key still sticks.",
+    "input_chars": 177,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4299,
+    "status": "decided",
+    "style_score": 0.3627,
+    "timestamp": "2026-11-15T22:35:59+00:00"
+   },
+   {
+    "combined_score": 0.5776,
+    "content_id": "1e382006-a077-46c6-8902-cb9ac40eaf5d",
+    "creator_id": "cap_t1_N3",
+    "duration_ms": 196.2,
+    "guess": "ai",
+    "input": "My experience from SolarCity has prepared me to take on bigger challenges. During my time there, I was able to pick up a in-house client side framework and PolymerJS, which I had no prior experience w",
+    "input_chars": 609,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.6534,
+    "status": "decided",
+    "style_score": 0.5017,
+    "timestamp": "2026-11-15T22:35:59+00:00"
+   },
+   {
+    "combined_score": 0.3237,
+    "content_id": "3ddf75eb-86cc-4b3f-80d8-f6812b492098",
+    "creator_id": "cap_t1_N4",
+    "duration_ms": 75.1,
+    "guess": "human",
+    "input": "Etsy is a great platform for people who wants to test out starting their own business, it has a lot less learning curve n upfront cost compare to Amazon.",
+    "input_chars": 153,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.201,
+    "status": "decided",
+    "style_score": 0.4464,
+    "timestamp": "2026-11-15T22:35:59+00:00"
+   },
+   {
+    "combined_score": 0.541,
+    "content_id": "2061daa6-e0f3-47e2-9e78-482cb8653a8d",
+    "creator_id": "cap_t1_N5",
+    "duration_ms": 170.9,
+    "guess": "ai",
+    "input": "Etsy is a great platform for people who wants to test out starting their own business, it has a lot less learning curve n upfront cost compare to Amazon. It cost only $20 cents to post a listing on Et",
+    "input_chars": 510,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4501,
+    "status": "decided",
+    "style_score": 0.6319,
+    "timestamp": "2026-11-15T22:35:59+00:00"
+   },
+   {
+    "combined_score": 0.2486,
+    "content_id": "fe892e43-330b-44b9-aa01-20c3616ad8db",
+    "creator_id": "cap_t1_N6",
+    "duration_ms": 390.2,
+    "guess": "human",
+    "input": "So ngl I’m not new to online business I had quite few Etsy stores..pendanteden is the true handmade but later only I did wholesale, drop shipping on Etsy had few other stores they all sold a lot at fa",
+    "input_chars": 941,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0985,
+    "status": "decided",
+    "style_score": 0.3988,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.0956,
+    "content_id": "e08e7ada-35e6-4d4a-9fec-5f069992ba47",
+    "creator_id": "cap_t1_N7",
+    "duration_ms": 69.3,
+    "guess": "human",
+    "input": "Soft life: slow mornings, coffee, home, golden hour, trees around my condo",
+    "input_chars": 74,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0246,
+    "status": "decided",
+    "style_score": 0.1667,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.1375,
+    "content_id": "cca79cdb-be2b-4d6c-973a-4a1278a4a078",
+    "creator_id": "cap_t1_N8",
+    "duration_ms": 67.8,
+    "guess": "human",
+    "input": "Day in my life: ‘10am on a Wednesday’ style, ex-tech girl running her own shop.",
+    "input_chars": 79,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0527,
+    "status": "decided",
+    "style_score": 0.2222,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.2998,
+    "content_id": "446b4231-5616-49a0-a1f7-268d75082547",
+    "creator_id": "cap_t1_N9",
+    "duration_ms": 66.2,
+    "guess": "human",
+    "input": "These videos r great thanks. Let’s see how they perform. I’m excited",
+    "input_chars": 68,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0692,
+    "status": "decided",
+    "style_score": 0.5303,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.2615,
+    "content_id": "d5b175ed-02b0-4bec-85ee-7c0c818ce3ac",
+    "creator_id": "cap_t1_N10",
+    "duration_ms": 67.5,
+    "guess": "human",
+    "input": "No I’m asking u which one to get from looking at the research Jesus.",
+    "input_chars": 68,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0229,
+    "status": "decided",
+    "style_score": 0.5,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   }
+  ],
+  "c1_failures": [],
+  "c2_failures": [
+   "FR1",
+   "FR2",
+   "FR3",
+   "FR4",
+   "FR5",
+   "ES1",
+   "ES2",
+   "ES3",
+   "ES4",
+   "ES5"
+  ],
+  "c4_failures": [],
+  "c3_missing": [
+   "NEW1",
+   "NEW2",
+   "NEW3",
+   "FR1",
+   "FR2",
+   "FR3",
+   "FR4",
+   "FR5",
+   "ES1",
+   "ES2",
+   "ES3",
+   "ES4",
+   "ES5"
+  ]
+ },
+ {
+  "trial": 2,
+  "c1": [
+   12,
+   12
+  ],
+  "c2": [
+   0,
+   10
+  ],
+  "c3": [
+   9,
+   22
+  ],
+  "c4": [
+   10,
+   10
+  ],
+  "c5": [
+   10,
+   10
+  ],
+  "durations_ms": [
+   106.7,
+   78.9,
+   193.1,
+   74.1,
+   168.7,
+   353.7,
+   67.5,
+   70.3,
+   66.0,
+   67.0
+  ],
+  "sent": [
+   {
+    "group": "bad",
+    "id": "MF01",
+    "note": "text is only whitespace",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF02",
+    "note": "text is a single character",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 1)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF03",
+    "note": "text is control characters",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 3)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF04",
+    "note": "text is only punctuation",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF05",
+    "note": "text is a very long single word",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 1)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF06",
+    "note": "text is emoji only",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF07",
+    "note": "text is right-to-left script",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF08",
+    "note": "text is 60,000 characters",
+    "status": 400,
+    "payload": {
+     "error": "text_too_long",
+     "message": "text must be 20000 characters or fewer."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW1",
+    "note": "missing text field",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW2",
+    "note": "text is a number",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW3",
+    "note": "broken JSON",
+    "status": 400,
+    "payload": {
+     "error": "invalid_json",
+     "message": "Send a JSON object with text and creator_id."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW4",
+    "note": "nine-word sentence",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 9)."
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR1",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6651,
+     "content_id": "208385ca-46c9-40ff-ab5f-4cfd5972e67e",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.2642,
+     "style_score": 0.4056
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR2",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5752,
+     "content_id": "d01a52c0-8c38-4dc7-b823-b70f4af3ca3f",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3328,
+     "style_score": 0.5167
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR3",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7243,
+     "content_id": "5fda25c4-1864-43e2-aeaa-c63afcc4b404",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.1685,
+     "style_score": 0.383
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR4",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6184,
+     "content_id": "e912e1fb-b776-4000-92ab-d9e3aef95266",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4021,
+     "style_score": 0.3611
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR5",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5789,
+     "content_id": "8ffbbeec-056b-44e1-ab64-5ae5dfd438d7",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3237,
+     "style_score": 0.5185
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES1",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6806,
+     "content_id": "7c76d928-15c9-4ae2-8ef8-7741689a5bbe",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.1055,
+     "style_score": 0.5333
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES2",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5716,
+     "content_id": "168a1c48-9acd-4ae5-ba8b-b635d15be85f",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3133,
+     "style_score": 0.5435
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES3",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6962,
+     "content_id": "10a948fb-d881-4b34-8e69-7618b84337bd",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.202,
+     "style_score": 0.4056
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES4",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6124,
+     "content_id": "c6ee056c-4be2-4aec-b305-d5f6115b1f32",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.2752,
+     "style_score": 0.5
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES5",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6186,
+     "content_id": "ebed7a34-8500-40df-9bae-7958f1f30a02",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.2277,
+     "style_score": 0.5351
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N1",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5647,
+     "content_id": "c9756dd9-0b98-46ac-bbf6-8f9be07f8729",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.7372,
+     "style_score": 0.3922
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N2",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6037,
+     "content_id": "8d58542a-f4fb-43ae-98cd-b122bc158ffd",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4299,
+     "style_score": 0.3627
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N3",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5776,
+     "content_id": "49ed6b30-e4ec-4f29-814f-9a6755c55f29",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.6534,
+     "style_score": 0.5017
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N4",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6763,
+     "content_id": "0253236f-e385-4c65-b983-78355b971c68",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.201,
+     "style_score": 0.4464
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N5",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.541,
+     "content_id": "c88d9e1b-ad66-41cf-8256-2aee5a52cf3a",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4501,
+     "style_score": 0.6319
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N6",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7514,
+     "content_id": "11b57319-fa19-4566-9e84-b6e6e7872a9c",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0985,
+     "style_score": 0.3988
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N7",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.9044,
+     "content_id": "4b3795d6-771b-43ab-8168-840c11f692a3",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0246,
+     "style_score": 0.1667
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N8",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.8625,
+     "content_id": "4fc12478-9016-494d-acd7-3f0d2b0c18f8",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0527,
+     "style_score": 0.2222
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N9",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7002,
+     "content_id": "4fdc6573-3aa8-461d-a221-8c4915679a5b",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0692,
+     "style_score": 0.5303
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N10",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7385,
+     "content_id": "fa6e6586-0789-4990-940d-1c03373588b4",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0229,
+     "style_score": 0.5
+    }
+   }
+  ],
+  "new_log_entries": [
+   {
+    "creator_id": "cap_t2_MF01",
+    "duration_ms": 0.5,
+    "event": "rejected",
+    "input": "     \n\n   \t  ",
+    "input_chars": 13,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_MF02",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "a",
+    "input_chars": 1,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_MF03",
+    "duration_ms": 0.4,
+    "event": "rejected",
+    "input": "\u0001\u0002 test \u001b[31mred\u001b[0m",
+    "input_chars": 20,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_MF04",
+    "duration_ms": 0.7,
+    "event": "rejected",
+    "input": "!!! ??? ... ,,, ;;; --- ((( )))",
+    "input_chars": 31,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_MF05",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "input_chars": 4000,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_MF06",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣",
+    "input_chars": 200,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_MF07",
+    "duration_ms": 0.5,
+    "event": "rejected",
+    "input": "هذا نص باللغة العربية لاختبار كيفية تعامل النظام مع النصوص التي لا تستخدم الأبجدية اللاتينية على الإطلاق.",
+    "input_chars": 105,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_MF08",
+    "duration_ms": 0.7,
+    "event": "rejected",
+    "input": "We got to the campsite about four. The pitch was fine, a bit sloped, but there was a tap nearby and the toilets were clean enough. Putting the tent up took longer than it should have because I had for",
+    "input_chars": 57640,
+    "reason": "text_too_long",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_NEW1",
+    "duration_ms": 0.5,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_NEW2",
+    "duration_ms": 0.4,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "unknown",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_json",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "creator_id": "cap_t2_NEW4",
+    "duration_ms": 0.6,
+    "event": "rejected",
+    "input": "I walked to the coffee shop this morning today.",
+    "input_chars": 47,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.3349,
+    "content_id": "208385ca-46c9-40ff-ab5f-4cfd5972e67e",
+    "creator_id": "cap_t2_FR1",
+    "duration_ms": 84.6,
+    "guess": "human",
+    "input": "Hier soir, nous avons préparé un grand dîner pour toute la famille avant de regarder un film ensemble.",
+    "input_chars": 102,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.2642,
+    "status": "decided",
+    "style_score": 0.4056,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.4248,
+    "content_id": "d01a52c0-8c38-4dc7-b823-b70f4af3ca3f",
+    "creator_id": "cap_t2_FR2",
+    "duration_ms": 82.9,
+    "guess": "human",
+    "input": "Ma sœur habite à Lyon depuis trois ans et elle travaille dans une petite librairie près de la gare.",
+    "input_chars": 99,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3328,
+    "status": "decided",
+    "style_score": 0.5167,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.2757,
+    "content_id": "5fda25c4-1864-43e2-aeaa-c63afcc4b404",
+    "creator_id": "cap_t2_FR3",
+    "duration_ms": 73.6,
+    "guess": "human",
+    "input": "Je voudrais réserver une table pour quatre personnes samedi soir, si possible près de la fenêtre.",
+    "input_chars": 97,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.1685,
+    "status": "decided",
+    "style_score": 0.383,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.3816,
+    "content_id": "e912e1fb-b776-4000-92ab-d9e3aef95266",
+    "creator_id": "cap_t2_FR4",
+    "duration_ms": 73.7,
+    "guess": "human",
+    "input": "Le matin, j'aime boire un café chaud en lisant les nouvelles avant de partir au travail.",
+    "input_chars": 88,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4021,
+    "status": "decided",
+    "style_score": 0.3611,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.4211,
+    "content_id": "8ffbbeec-056b-44e1-ab64-5ae5dfd438d7",
+    "creator_id": "cap_t2_FR5",
+    "duration_ms": 133.8,
+    "guess": "human",
+    "input": "Nous avons visité le musée dimanche dernier et les enfants ont adoré les tableaux de couleurs vives.",
+    "input_chars": 100,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3237,
+    "status": "decided",
+    "style_score": 0.5185,
+    "timestamp": "2026-11-15T22:36:00+00:00"
+   },
+   {
+    "combined_score": 0.3194,
+    "content_id": "7c76d928-15c9-4ae2-8ef8-7741689a5bbe",
+    "creator_id": "cap_t2_ES1",
+    "duration_ms": 106.2,
+    "guess": "human",
+    "input": "Ayer por la tarde fuimos al mercado a comprar frutas frescas y verduras para la cena de toda la familia.",
+    "input_chars": 104,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.1055,
+    "status": "decided",
+    "style_score": 0.5333,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.4284,
+    "content_id": "168a1c48-9acd-4ae5-ba8b-b635d15be85f",
+    "creator_id": "cap_t2_ES2",
+    "duration_ms": 82.7,
+    "guess": "human",
+    "input": "Mi hermana vive en Madrid desde hace tres años y trabaja en una pequeña librería cerca de la estación.",
+    "input_chars": 102,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3133,
+    "status": "decided",
+    "style_score": 0.5435,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.3038,
+    "content_id": "10a948fb-d881-4b34-8e69-7618b84337bd",
+    "creator_id": "cap_t2_ES3",
+    "duration_ms": 76.7,
+    "guess": "human",
+    "input": "Quisiera reservar una mesa para cuatro personas el sábado por la noche, si es posible junto a la ventana.",
+    "input_chars": 105,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.202,
+    "status": "decided",
+    "style_score": 0.4056,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.3876,
+    "content_id": "c6ee056c-4be2-4aec-b305-d5f6115b1f32",
+    "creator_id": "cap_t2_ES4",
+    "duration_ms": 77.7,
+    "guess": "human",
+    "input": "Por la mañana me gusta tomar un café caliente mientras leo las noticias antes de ir a trabajar.",
+    "input_chars": 95,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.2752,
+    "status": "decided",
+    "style_score": 0.5,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.3814,
+    "content_id": "ebed7a34-8500-40df-9bae-7958f1f30a02",
+    "creator_id": "cap_t2_ES5",
+    "duration_ms": 76.4,
+    "guess": "human",
+    "input": "Visitamos el museo el domingo pasado y a los niños les encantaron los cuadros de colores muy vivos.",
+    "input_chars": 99,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.2277,
+    "status": "decided",
+    "style_score": 0.5351,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.5647,
+    "content_id": "c9756dd9-0b98-46ac-bbf6-8f9be07f8729",
+    "creator_id": "cap_t2_N1",
+    "duration_ms": 106.7,
+    "guess": "ai",
+    "input": "At a funeral, an old woman is wearing all black elegant dress and standing far away from the rest of the people. Lots of people are crying at the funeral. But not the old woman. She looks peaceful, ev",
+    "input_chars": 247,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.7372,
+    "status": "decided",
+    "style_score": 0.3922,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.3963,
+    "content_id": "8d58542a-f4fb-43ae-98cd-b122bc158ffd",
+    "creator_id": "cap_t2_N2",
+    "duration_ms": 78.9,
+    "guess": "human",
+    "input": "I spilled coffee on my keyboard this morning and spent twenty minutes drying it with a hairdryer while my cat watched from the couch like I was an idiot. The N key still sticks.",
+    "input_chars": 177,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4299,
+    "status": "decided",
+    "style_score": 0.3627,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.5776,
+    "content_id": "49ed6b30-e4ec-4f29-814f-9a6755c55f29",
+    "creator_id": "cap_t2_N3",
+    "duration_ms": 193.1,
+    "guess": "ai",
+    "input": "My experience from SolarCity has prepared me to take on bigger challenges. During my time there, I was able to pick up a in-house client side framework and PolymerJS, which I had no prior experience w",
+    "input_chars": 609,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.6534,
+    "status": "decided",
+    "style_score": 0.5017,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.3237,
+    "content_id": "0253236f-e385-4c65-b983-78355b971c68",
+    "creator_id": "cap_t2_N4",
+    "duration_ms": 74.1,
+    "guess": "human",
+    "input": "Etsy is a great platform for people who wants to test out starting their own business, it has a lot less learning curve n upfront cost compare to Amazon.",
+    "input_chars": 153,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.201,
+    "status": "decided",
+    "style_score": 0.4464,
+    "timestamp": "2026-11-15T22:36:01+00:00"
+   },
+   {
+    "combined_score": 0.541,
+    "content_id": "c88d9e1b-ad66-41cf-8256-2aee5a52cf3a",
+    "creator_id": "cap_t2_N5",
+    "duration_ms": 168.7,
+    "guess": "ai",
+    "input": "Etsy is a great platform for people who wants to test out starting their own business, it has a lot less learning curve n upfront cost compare to Amazon. It cost only $20 cents to post a listing on Et",
+    "input_chars": 510,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4501,
+    "status": "decided",
+    "style_score": 0.6319,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.2486,
+    "content_id": "11b57319-fa19-4566-9e84-b6e6e7872a9c",
+    "creator_id": "cap_t2_N6",
+    "duration_ms": 353.7,
+    "guess": "human",
+    "input": "So ngl I’m not new to online business I had quite few Etsy stores..pendanteden is the true handmade but later only I did wholesale, drop shipping on Etsy had few other stores they all sold a lot at fa",
+    "input_chars": 941,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0985,
+    "status": "decided",
+    "style_score": 0.3988,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.0956,
+    "content_id": "4b3795d6-771b-43ab-8168-840c11f692a3",
+    "creator_id": "cap_t2_N7",
+    "duration_ms": 67.5,
+    "guess": "human",
+    "input": "Soft life: slow mornings, coffee, home, golden hour, trees around my condo",
+    "input_chars": 74,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0246,
+    "status": "decided",
+    "style_score": 0.1667,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.1375,
+    "content_id": "4fc12478-9016-494d-acd7-3f0d2b0c18f8",
+    "creator_id": "cap_t2_N8",
+    "duration_ms": 70.3,
+    "guess": "human",
+    "input": "Day in my life: ‘10am on a Wednesday’ style, ex-tech girl running her own shop.",
+    "input_chars": 79,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0527,
+    "status": "decided",
+    "style_score": 0.2222,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.2998,
+    "content_id": "4fdc6573-3aa8-461d-a221-8c4915679a5b",
+    "creator_id": "cap_t2_N9",
+    "duration_ms": 66.0,
+    "guess": "human",
+    "input": "These videos r great thanks. Let’s see how they perform. I’m excited",
+    "input_chars": 68,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0692,
+    "status": "decided",
+    "style_score": 0.5303,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.2615,
+    "content_id": "fa6e6586-0789-4990-940d-1c03373588b4",
+    "creator_id": "cap_t2_N10",
+    "duration_ms": 67.0,
+    "guess": "human",
+    "input": "No I’m asking u which one to get from looking at the research Jesus.",
+    "input_chars": 68,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0229,
+    "status": "decided",
+    "style_score": 0.5,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   }
+  ],
+  "c1_failures": [],
+  "c2_failures": [
+   "FR1",
+   "FR2",
+   "FR3",
+   "FR4",
+   "FR5",
+   "ES1",
+   "ES2",
+   "ES3",
+   "ES4",
+   "ES5"
+  ],
+  "c4_failures": [],
+  "c3_missing": [
+   "NEW1",
+   "NEW2",
+   "NEW3",
+   "FR1",
+   "FR2",
+   "FR3",
+   "FR4",
+   "FR5",
+   "ES1",
+   "ES2",
+   "ES3",
+   "ES4",
+   "ES5"
+  ]
+ },
+ {
+  "trial": 3,
+  "c1": [
+   12,
+   12
+  ],
+  "c2": [
+   0,
+   10
+  ],
+  "c3": [
+   9,
+   22
+  ],
+  "c4": [
+   10,
+   10
+  ],
+  "c5": [
+   10,
+   10
+  ],
+  "durations_ms": [
+   104.8,
+   80.4,
+   194.9,
+   72.8,
+   181.4,
+   358.9,
+   67.8,
+   70.4,
+   66.7,
+   76.3
+  ],
+  "sent": [
+   {
+    "group": "bad",
+    "id": "MF01",
+    "note": "text is only whitespace",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF02",
+    "note": "text is a single character",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 1)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF03",
+    "note": "text is control characters",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 3)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF04",
+    "note": "text is only punctuation",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF05",
+    "note": "text is a very long single word",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 1)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF06",
+    "note": "text is emoji only",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF07",
+    "note": "text is right-to-left script",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 0)."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "MF08",
+    "note": "text is 60,000 characters",
+    "status": 400,
+    "payload": {
+     "error": "text_too_long",
+     "message": "text must be 20000 characters or fewer."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW1",
+    "note": "missing text field",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW2",
+    "note": "text is a number",
+    "status": 400,
+    "payload": {
+     "error": "invalid_text",
+     "message": "text is required and must be a non-empty string."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW3",
+    "note": "broken JSON",
+    "status": 400,
+    "payload": {
+     "error": "invalid_json",
+     "message": "Send a JSON object with text and creator_id."
+    }
+   },
+   {
+    "group": "bad",
+    "id": "NEW4",
+    "note": "nine-word sentence",
+    "status": 400,
+    "payload": {
+     "error": "too_few_words",
+     "message": "text needs at least 10 words written in Latin letters to be scored (found 9)."
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR1",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6651,
+     "content_id": "ba8a8cef-caed-4dfb-8643-21eb3d8f6d15",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.2642,
+     "style_score": 0.4056
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR2",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5752,
+     "content_id": "472568ac-71af-4c2e-a5a0-b3a16630ad9f",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3328,
+     "style_score": 0.5167
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR3",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7243,
+     "content_id": "a3ff538f-af5f-4363-aa9d-b3d86b6873a1",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.1685,
+     "style_score": 0.383
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR4",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6184,
+     "content_id": "602a249c-b24b-49eb-b9a0-c961d7824384",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4021,
+     "style_score": 0.3611
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "FR5",
+    "note": "French",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5789,
+     "content_id": "6781ecc0-5799-42e6-8682-17bc82666a31",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3237,
+     "style_score": 0.5185
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES1",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6806,
+     "content_id": "979d9deb-63f3-45e8-9acb-1e4e3d8023a2",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.1055,
+     "style_score": 0.5333
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES2",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5716,
+     "content_id": "3e680737-5025-4630-9eb9-301892aef984",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.3133,
+     "style_score": 0.5435
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES3",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6962,
+     "content_id": "93f2dcd9-70d0-45f0-ba81-d6418c2fec52",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.202,
+     "style_score": 0.4056
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES4",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6124,
+     "content_id": "5fd6e487-7af7-4d81-b412-45a9e3395ecd",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.2752,
+     "style_score": 0.5
+    }
+   },
+   {
+    "group": "foreign",
+    "id": "ES5",
+    "note": "Spanish",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6186,
+     "content_id": "7b201c3f-6423-4128-b7e7-8a7d5c7a435c",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.2277,
+     "style_score": 0.5351
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N1",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5647,
+     "content_id": "c28d69c5-a0dd-426d-8ba3-48e681bdcb6f",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.7372,
+     "style_score": 0.3922
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N2",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6037,
+     "content_id": "8ef895b4-39d4-434b-8667-433f09165c29",
+     "guess": "human",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4299,
+     "style_score": 0.3627
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N3",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.5776,
+     "content_id": "9f76ecf5-b849-48e9-9eb8-2cc67c342c09",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.6534,
+     "style_score": 0.5017
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N4",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.6763,
+     "content_id": "7683df61-93b7-40dc-bc21-2af0b13a0be4",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.201,
+     "style_score": 0.4464
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N5",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.541,
+     "content_id": "ad620b74-acf4-4f1c-a6a4-5a7d8e36856f",
+     "guess": "ai",
+     "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+     "model_score": 0.4501,
+     "style_score": 0.6319
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N6",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7514,
+     "content_id": "8ea5bd58-da2f-4652-8418-291f350524fd",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0985,
+     "style_score": 0.3988
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N7",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.9044,
+     "content_id": "5954a46e-9f99-4ec4-aeff-2e73e68e62a7",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0246,
+     "style_score": 0.1667
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N8",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.8625,
+     "content_id": "2627d92c-de8e-4c74-b509-d4cc6363c5fb",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0527,
+     "style_score": 0.2222
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N9",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7002,
+     "content_id": "95dc6186-0de0-4095-9dce-6347c00cc730",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0692,
+     "style_score": 0.5303
+    }
+   },
+   {
+    "group": "normal",
+    "id": "N10",
+    "note": "my own writing",
+    "status": 200,
+    "payload": {
+     "confidence": 0.7385,
+     "content_id": "c5b688ef-1ab5-41de-a0ad-4795c5caba92",
+     "guess": "human",
+     "label": "This looks like it was written by a person.",
+     "model_score": 0.0229,
+     "style_score": 0.5
+    }
+   }
+  ],
+  "new_log_entries": [
+   {
+    "creator_id": "cap_t3_MF01",
+    "duration_ms": 0.4,
+    "event": "rejected",
+    "input": "     \n\n   \t  ",
+    "input_chars": 13,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_MF02",
+    "duration_ms": 0.4,
+    "event": "rejected",
+    "input": "a",
+    "input_chars": 1,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_MF03",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "\u0001\u0002 test \u001b[31mred\u001b[0m",
+    "input_chars": 20,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_MF04",
+    "duration_ms": 0.5,
+    "event": "rejected",
+    "input": "!!! ??? ... ,,, ;;; --- ((( )))",
+    "input_chars": 31,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_MF05",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "input_chars": 4000,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_MF06",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣",
+    "input_chars": 200,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_MF07",
+    "duration_ms": 0.6,
+    "event": "rejected",
+    "input": "هذا نص باللغة العربية لاختبار كيفية تعامل النظام مع النصوص التي لا تستخدم الأبجدية اللاتينية على الإطلاق.",
+    "input_chars": 105,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_MF08",
+    "duration_ms": 0.6,
+    "event": "rejected",
+    "input": "We got to the campsite about four. The pitch was fine, a bit sloped, but there was a tap nearby and the toilets were clean enough. Putting the tent up took longer than it should have because I had for",
+    "input_chars": 57640,
+    "reason": "text_too_long",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_NEW1",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_NEW2",
+    "duration_ms": 0.5,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_text",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "unknown",
+    "duration_ms": 0.4,
+    "event": "rejected",
+    "input": null,
+    "input_chars": null,
+    "reason": "invalid_json",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "creator_id": "cap_t3_NEW4",
+    "duration_ms": 0.3,
+    "event": "rejected",
+    "input": "I walked to the coffee shop this morning today.",
+    "input_chars": 47,
+    "reason": "too_few_words",
+    "route": "/submit",
+    "status": "rejected",
+    "status_code": 400,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.3349,
+    "content_id": "ba8a8cef-caed-4dfb-8643-21eb3d8f6d15",
+    "creator_id": "cap_t3_FR1",
+    "duration_ms": 84.0,
+    "guess": "human",
+    "input": "Hier soir, nous avons préparé un grand dîner pour toute la famille avant de regarder un film ensemble.",
+    "input_chars": 102,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.2642,
+    "status": "decided",
+    "style_score": 0.4056,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.4248,
+    "content_id": "472568ac-71af-4c2e-a5a0-b3a16630ad9f",
+    "creator_id": "cap_t3_FR2",
+    "duration_ms": 83.1,
+    "guess": "human",
+    "input": "Ma sœur habite à Lyon depuis trois ans et elle travaille dans une petite librairie près de la gare.",
+    "input_chars": 99,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3328,
+    "status": "decided",
+    "style_score": 0.5167,
+    "timestamp": "2026-11-15T22:36:02+00:00"
+   },
+   {
+    "combined_score": 0.2757,
+    "content_id": "a3ff538f-af5f-4363-aa9d-b3d86b6873a1",
+    "creator_id": "cap_t3_FR3",
+    "duration_ms": 73.5,
+    "guess": "human",
+    "input": "Je voudrais réserver une table pour quatre personnes samedi soir, si possible près de la fenêtre.",
+    "input_chars": 97,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.1685,
+    "status": "decided",
+    "style_score": 0.383,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.3816,
+    "content_id": "602a249c-b24b-49eb-b9a0-c961d7824384",
+    "creator_id": "cap_t3_FR4",
+    "duration_ms": 74.5,
+    "guess": "human",
+    "input": "Le matin, j'aime boire un café chaud en lisant les nouvelles avant de partir au travail.",
+    "input_chars": 88,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4021,
+    "status": "decided",
+    "style_score": 0.3611,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.4211,
+    "content_id": "6781ecc0-5799-42e6-8682-17bc82666a31",
+    "creator_id": "cap_t3_FR5",
+    "duration_ms": 75.6,
+    "guess": "human",
+    "input": "Nous avons visité le musée dimanche dernier et les enfants ont adoré les tableaux de couleurs vives.",
+    "input_chars": 100,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3237,
+    "status": "decided",
+    "style_score": 0.5185,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.3194,
+    "content_id": "979d9deb-63f3-45e8-9acb-1e4e3d8023a2",
+    "creator_id": "cap_t3_ES1",
+    "duration_ms": 105.6,
+    "guess": "human",
+    "input": "Ayer por la tarde fuimos al mercado a comprar frutas frescas y verduras para la cena de toda la familia.",
+    "input_chars": 104,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.1055,
+    "status": "decided",
+    "style_score": 0.5333,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.4284,
+    "content_id": "3e680737-5025-4630-9eb9-301892aef984",
+    "creator_id": "cap_t3_ES2",
+    "duration_ms": 98.5,
+    "guess": "human",
+    "input": "Mi hermana vive en Madrid desde hace tres años y trabaja en una pequeña librería cerca de la estación.",
+    "input_chars": 102,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.3133,
+    "status": "decided",
+    "style_score": 0.5435,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.3038,
+    "content_id": "93f2dcd9-70d0-45f0-ba81-d6418c2fec52",
+    "creator_id": "cap_t3_ES3",
+    "duration_ms": 76.0,
+    "guess": "human",
+    "input": "Quisiera reservar una mesa para cuatro personas el sábado por la noche, si es posible junto a la ventana.",
+    "input_chars": 105,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.202,
+    "status": "decided",
+    "style_score": 0.4056,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.3876,
+    "content_id": "5fd6e487-7af7-4d81-b412-45a9e3395ecd",
+    "creator_id": "cap_t3_ES4",
+    "duration_ms": 76.0,
+    "guess": "human",
+    "input": "Por la mañana me gusta tomar un café caliente mientras leo las noticias antes de ir a trabajar.",
+    "input_chars": 95,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.2752,
+    "status": "decided",
+    "style_score": 0.5,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.3814,
+    "content_id": "7b201c3f-6423-4128-b7e7-8a7d5c7a435c",
+    "creator_id": "cap_t3_ES5",
+    "duration_ms": 74.1,
+    "guess": "human",
+    "input": "Visitamos el museo el domingo pasado y a los niños les encantaron los cuadros de colores muy vivos.",
+    "input_chars": 99,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.2277,
+    "status": "decided",
+    "style_score": 0.5351,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.5647,
+    "content_id": "c28d69c5-a0dd-426d-8ba3-48e681bdcb6f",
+    "creator_id": "cap_t3_N1",
+    "duration_ms": 104.8,
+    "guess": "ai",
+    "input": "At a funeral, an old woman is wearing all black elegant dress and standing far away from the rest of the people. Lots of people are crying at the funeral. But not the old woman. She looks peaceful, ev",
+    "input_chars": 247,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.7372,
+    "status": "decided",
+    "style_score": 0.3922,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.3963,
+    "content_id": "8ef895b4-39d4-434b-8667-433f09165c29",
+    "creator_id": "cap_t3_N2",
+    "duration_ms": 80.4,
+    "guess": "human",
+    "input": "I spilled coffee on my keyboard this morning and spent twenty minutes drying it with a hairdryer while my cat watched from the couch like I was an idiot. The N key still sticks.",
+    "input_chars": 177,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4299,
+    "status": "decided",
+    "style_score": 0.3627,
+    "timestamp": "2026-11-15T22:36:03+00:00"
+   },
+   {
+    "combined_score": 0.5776,
+    "content_id": "9f76ecf5-b849-48e9-9eb8-2cc67c342c09",
+    "creator_id": "cap_t3_N3",
+    "duration_ms": 194.9,
+    "guess": "ai",
+    "input": "My experience from SolarCity has prepared me to take on bigger challenges. During my time there, I was able to pick up a in-house client side framework and PolymerJS, which I had no prior experience w",
+    "input_chars": 609,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.6534,
+    "status": "decided",
+    "style_score": 0.5017,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   },
+   {
+    "combined_score": 0.3237,
+    "content_id": "7683df61-93b7-40dc-bc21-2af0b13a0be4",
+    "creator_id": "cap_t3_N4",
+    "duration_ms": 72.8,
+    "guess": "human",
+    "input": "Etsy is a great platform for people who wants to test out starting their own business, it has a lot less learning curve n upfront cost compare to Amazon.",
+    "input_chars": 153,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.201,
+    "status": "decided",
+    "style_score": 0.4464,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   },
+   {
+    "combined_score": 0.541,
+    "content_id": "ad620b74-acf4-4f1c-a6a4-5a7d8e36856f",
+    "creator_id": "cap_t3_N5",
+    "duration_ms": 181.4,
+    "guess": "ai",
+    "input": "Etsy is a great platform for people who wants to test out starting their own business, it has a lot less learning curve n upfront cost compare to Amazon. It cost only $20 cents to post a listing on Et",
+    "input_chars": 510,
+    "label": "We can't tell for certain how this was written. Our tools don't give a clear answer either way, and this isn't a judgment about you or your work.",
+    "model_score": 0.4501,
+    "status": "decided",
+    "style_score": 0.6319,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   },
+   {
+    "combined_score": 0.2486,
+    "content_id": "8ea5bd58-da2f-4652-8418-291f350524fd",
+    "creator_id": "cap_t3_N6",
+    "duration_ms": 358.9,
+    "guess": "human",
+    "input": "So ngl I’m not new to online business I had quite few Etsy stores..pendanteden is the true handmade but later only I did wholesale, drop shipping on Etsy had few other stores they all sold a lot at fa",
+    "input_chars": 941,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0985,
+    "status": "decided",
+    "style_score": 0.3988,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   },
+   {
+    "combined_score": 0.0956,
+    "content_id": "5954a46e-9f99-4ec4-aeff-2e73e68e62a7",
+    "creator_id": "cap_t3_N7",
+    "duration_ms": 67.8,
+    "guess": "human",
+    "input": "Soft life: slow mornings, coffee, home, golden hour, trees around my condo",
+    "input_chars": 74,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0246,
+    "status": "decided",
+    "style_score": 0.1667,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   },
+   {
+    "combined_score": 0.1375,
+    "content_id": "2627d92c-de8e-4c74-b509-d4cc6363c5fb",
+    "creator_id": "cap_t3_N8",
+    "duration_ms": 70.4,
+    "guess": "human",
+    "input": "Day in my life: ‘10am on a Wednesday’ style, ex-tech girl running her own shop.",
+    "input_chars": 79,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0527,
+    "status": "decided",
+    "style_score": 0.2222,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   },
+   {
+    "combined_score": 0.2998,
+    "content_id": "95dc6186-0de0-4095-9dce-6347c00cc730",
+    "creator_id": "cap_t3_N9",
+    "duration_ms": 66.7,
+    "guess": "human",
+    "input": "These videos r great thanks. Let’s see how they perform. I’m excited",
+    "input_chars": 68,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0692,
+    "status": "decided",
+    "style_score": 0.5303,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   },
+   {
+    "combined_score": 0.2615,
+    "content_id": "c5b688ef-1ab5-41de-a0ad-4795c5caba92",
+    "creator_id": "cap_t3_N10",
+    "duration_ms": 76.3,
+    "guess": "human",
+    "input": "No I’m asking u which one to get from looking at the research Jesus.",
+    "input_chars": 68,
+    "label": "This looks like it was written by a person.",
+    "model_score": 0.0229,
+    "status": "decided",
+    "style_score": 0.5,
+    "timestamp": "2026-11-15T22:36:04+00:00"
+   }
+  ],
+  "c1_failures": [],
+  "c2_failures": [
+   "FR1",
+   "FR2",
+   "FR3",
+   "FR4",
+   "FR5",
+   "ES1",
+   "ES2",
+   "ES3",
+   "ES4",
+   "ES5"
+  ],
+  "c4_failures": [],
+  "c3_missing": [
+   "NEW1",
+   "NEW2",
+   "NEW3",
+   "FR1",
+   "FR2",
+   "FR3",
+   "FR4",
+   "FR5",
+   "ES1",
+   "ES2",
+   "ES3",
+   "ES4",
+   "ES5"
+  ]
+ }
+]
