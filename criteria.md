@@ -127,3 +127,24 @@ A service that crashes on bad input is unusable for everyone, not just the perso
      A number you missed stays where it is, gets diagnosed, and gets a fix
      attempted. That's where the points are.
      ───────────────────────────────────────────────────────────────────────── -->
+
+---
+
+# Capstone criteria (Unit 9)
+
+*Drafted with Claude from what I found and decided while testing the guard by hand (the 9 of 10 foreign-language target and the French result were mine); I read them and approved them before any results existed.*
+
+**1. Bad input is refused.** Of 12 bad inputs, 12 get an HTTP 400 with an `error` and a `message`, and none crashes the service. The 12 are the 8 malformed inputs from the Unit 8 attack set (whitespace only, one character, control characters, punctuation only, one very long word, emoji only, right-to-left script, 60,000 characters) plus a missing `text` field, a number as `text`, broken JSON, and a 9-word sentence.
+**Why this target:** each of these either crashed the service or got a made-up label last unit, and a refusal is cheap, so there is no reason to accept a miss.
+
+**2. Foreign-language text is refused.** Of 10 French and Spanish sentences of at least 10 words each (5 of each), 9 get an HTTP 400.
+**Why this target:** the detector learned English, so it gave a French sentence a confident "written by a person" label, which is false assurance for anyone submitting AI-written text in another language. I allow one miss for a sentence that is mostly English names.
+
+**3. Every refusal is logged.** After the 12 bad inputs and the 10 foreign-language sentences, 22 of 22 refusals have an entry in `logs/audit.jsonl` with `input` and `duration_ms` filled in.
+**Why this target:** the one-character crash last unit left no log entry at all, and an input that leaves no trace is one I can never diagnose.
+
+**4. Normal writing still works.** Of 10 paragraphs of my own writing, each at least 10 words, 9 get a score and a label (HTTP 200) and are not refused.
+**Why this target:** wrongly refusing a real writer is the mistake this service exists to avoid, so almost none should be refused, but one slip on a short or odd paragraph is tolerable.
+
+**5. A warm request is quick.** After the model has loaded (the first scored request is not counted), 9 of 10 scored requests finish in under 3 seconds, measured by `duration_ms` in the log.
+**Why this target:** the first scored request took 26 seconds while the model loaded, and I care about the ordinary case a writer sees. 3 seconds is about what a person will wait without thinking it broke.
