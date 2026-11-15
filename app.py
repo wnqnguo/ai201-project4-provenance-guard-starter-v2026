@@ -24,11 +24,13 @@ Routes:
     GET  /health      is the service up, and is the model loaded
 """
 
+import time
 import uuid
 
-from flask import Flask, jsonify, request
+from flask import Flask, g, jsonify, request
 
 import audit
+import guard
 import config
 import detector
 import scoring
@@ -110,12 +112,31 @@ if config.RATE_LIMITING_ENABLED:
             creator_id=payload.get("creator_id", "unknown"),
             reason="rate_limited",
             limit=str(exc.description),
+            duration_ms=_ms(),
+            **_input_fields(payload.get("text")),
         )
         return jsonify({
             "error": "rate_limited",
             "message": "Too many submissions. Try again shortly.",
             "limit": str(exc.description),
         }), 429
+
+
+def _ms() -> float:
+    """Milliseconds since this request started (set in before_request)."""
+    return round((time.perf_counter() - getattr(g, "t0", time.perf_counter())) * 1000, 1)
+
+
+def _input_fields(text) -> dict:
+    """What came in, for the log: the first 200 characters and the full length."""
+    if isinstance(text, str):
+        return {"input": text[:200], "input_chars": len(text)}
+    return {"input": None, "input_chars": None}
+
+
+@app.before_request
+def _start_timer():
+    g.t0 = time.perf_counter()
 
 
 def _refuse(payload, error, message, status=400):
@@ -126,6 +147,8 @@ def _refuse(payload, error, message, status=400):
         reason=error,
         route=request.path,
         status_code=status,
+        duration_ms=_ms(),
+        **_input_fields(payload.get("text") if isinstance(payload, dict) else None),
     )
     return jsonify({"error": error, "message": message}), status
 
@@ -229,12 +252,22 @@ def submit():
     if len(text) > 20000:
         return _refuse(payload, "text_too_long", "text must be 20000 characters or fewer.")
 
+    # Capstone: refuse text that can't be scored, before either signal runs.
+    problem = guard.check_text(text)
+    if problem:
+        return _refuse(payload, problem[0], problem[1])
+
     content_id = str(uuid.uuid4())
 
     # Milestones 3 and 4: both signals, combined into one score.
-    model_score = detector.model_signal(text)
-    style_score = stylometry.style_signal(text)
-    combined = scoring.combine_signals(model_score, style_score)
+    # Capstone: anything unexpected while scoring is logged and answered as JSON,
+    # not left to crash into an HTML error page with no log entry.
+    try:
+        model_score = detector.model_signal(text)
+        style_score = stylometry.style_signal(text)
+        combined = scoring.combine_signals(model_score, style_score)
+    except Exception as exc:   # noqa: BLE001
+        return _refuse(payload, "scoring_failed", f"could not score this text ({type(exc).__name__}).", 500)
 
     # The guess is which side of 0.5 the combined score falls on. Confidence is
     # how sure that guess is: 0.5 means a coin flip, 1.0 means certain.
@@ -252,6 +285,8 @@ def submit():
         combined_score=combined,
         label=label,
         status="decided",
+        duration_ms=_ms(),
+        **_input_fields(text),
     )
 
     return jsonify({
