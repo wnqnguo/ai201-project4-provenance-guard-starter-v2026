@@ -54,6 +54,9 @@ DETECTOR_MAX_TOKENS = 400
 # down BEFORE you code it, and to put the numbers in your README. Whatever you
 # decide, it goes here.
 
+# Capstone: shortest text the guard will score, in Latin-letter words.
+MIN_WORDS = 10
+
 WEIGHT_MODEL_SIGNAL = 0.5
 WEIGHT_STYLE_SIGNAL = 0.5
 
