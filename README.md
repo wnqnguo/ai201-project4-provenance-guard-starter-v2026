@@ -1074,3 +1074,20 @@ What it cost, which I also predicted: real AI text now needs a combined score ab
 ---
 
 📖 **How to run this project: [RUNNING.md](RUNNING.md)**
+
+---
+
+## Capstone
+
+**What This Extends**
+
+Provenance Guard, the same repository as Units 7 and 8. What's new is an input guard on `POST /submit`: text that can't be scored gets a clear, logged 400 instead of crashing the service or getting a confident label. It also adds a catch-all so an unexpected failure while scoring returns a logged error instead of an HTML crash page, and the audit log now records how long each request took and what text came in.
+
+**The Shape**
+
+B, harden against failure. The Unit 8 attack run left a list of bad-input failures: a one-character text crashed the service with a 500 and left no log entry (MF02), and control characters, one very long word, emoji and right-to-left script all got scored and labeled as if they were writing (MF03, MF05, MF06, MF07). This unit's extension makes the service refuse those inputs honestly.
+
+Out of scope, on purpose:
+- The `creator_id` rotation that gets around the rate limiter. It needs an account system this project doesn't have.
+- Any change to the two signals, the weights or the thresholds. That is a different problem (the evasion attacks) and would mix two changes together.
+- A hosted deploy. The detector loads GPT-2 locally, which doesn't fit a free 512 MB host, so this runs locally with logs (Path B).
