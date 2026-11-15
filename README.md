@@ -1091,3 +1091,117 @@ Out of scope, on purpose:
 - The `creator_id` rotation that gets around the rate limiter. It needs an account system this project doesn't have.
 - Any change to the two signals, the weights or the thresholds. That is a different problem (the evasion attacks) and would mix two changes together.
 - A hosted deploy. The detector loads GPT-2 locally, which doesn't fit a free 512 MB host, so this runs locally with logs (Path B).
+
+**Run Log and Verdicts**
+
+Produced by `capstone_run.py::main` and `capstone_run.py::run_trial` (inputs in `capstone_inputs.json`), service running as in RUNNING.md. Raw results: `results/capstone_2026-11-15_1436_before.json` and `.md`. Every request used its own `creator_id`, so the rate limiter was not what was measured.
+
+**Before the improvement**
+
+| Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
+|---|---|---|---|---|---|
+| 1. Bad input refused with a 400 and a message | 12 of 12 | 12/12 | 12/12 | 12/12 | MET |
+| 2. French/Spanish refused with a 400 | 9 of 10 | 0/10 | 0/10 | 0/10 | MISSED |
+| 3. Every refusal logged with `input` and `duration_ms` | 22 of 22 | 9/22 | 9/22 | 9/22 | MISSED |
+| 4. My own paragraphs scored, not refused | 9 of 10 | 10/10 | 10/10 | 10/10 | MET |
+| 5. Warm scored request under 3 s | 9 of 10 | 10/10 | 10/10 | 10/10 | MET |
+
+All three trials came out identical, as expected: nothing here involves randomness, and the model is run the same way each time.
+
+Real output, trial 1 (produced by `capstone_run.py::run_trial`, which calls `app.py::submit`).
+
+Criterion 1, status and error for the 12 bad inputs:
+
+```
+MF01  400  invalid_text: text is required and must be a non-empty string.
+MF02  400  too_few_words: text needs at least 10 words written in Latin letters to be scored (found 1).
+MF03  400  too_few_words: text needs at least 10 words written in Latin letters to be scored (found 3).
+MF04  400  too_few_words: text needs at least 10 words written in Latin letters to be scored (found 0).
+MF05  400  too_few_words: text needs at least 10 words written in Latin letters to be scored (found 1).
+MF06  400  too_few_words: text needs at least 10 words written in Latin letters to be scored (found 0).
+MF07  400  too_few_words: text needs at least 10 words written in Latin letters to be scored (found 0).
+MF08  400  text_too_long: text must be 20000 characters or fewer.
+NEW1  400  invalid_text: text is required and must be a non-empty string.
+NEW2  400  invalid_text: text is required and must be a non-empty string.
+NEW3  400  invalid_json: Send a JSON object with text and creator_id.
+NEW4  400  too_few_words: text needs at least 10 words written in Latin letters to be scored (found 9).
+```
+
+Criterion 2, the ten French and Spanish sentences (none refused):
+
+```
+FR1  200  confidence 0.6651  model_score 0.2642  This looks like it was written by a person
+FR2  200  confidence 0.5752  model_score 0.3328  We can't tell for certain how this was wri
+FR3  200  confidence 0.7243  model_score 0.1685  This looks like it was written by a person
+FR4  200  confidence 0.6184  model_score 0.4021  We can't tell for certain how this was wri
+FR5  200  confidence 0.5789  model_score 0.3237  We can't tell for certain how this was wri
+ES1  200  confidence 0.6806  model_score 0.1055  This looks like it was written by a person
+ES2  200  confidence 0.5716  model_score 0.3133  We can't tell for certain how this was wri
+ES3  200  confidence 0.6962  model_score 0.202  This looks like it was written by a person
+ES4  200  confidence 0.6124  model_score 0.2752  We can't tell for certain how this was wri
+ES5  200  confidence 0.6186  model_score 0.2277  We can't tell for certain how this was wri
+```
+
+Criterion 3, the 12 rejected entries the service wrote to `logs/audit.jsonl` (via `audit.py::log_rejection`, called from `app.py::_refuse`). `input` is null on three of them, and the ten foreign-language sentences have no rejected entry at all because they were scored:
+
+```
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "invalid_text", "status_code": 400, "input": "     \n\n   \t  ", "input_chars": 13, "duration_ms": 0.7}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "too_few_words", "status_code": 400, "input": "a", "input_chars": 1, "duration_ms": 0.3}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "too_few_words", "status_code": 400, "input": "\u0001\u0002 test \u001b[31mred\u001b[0m", "input_chars": 20, "duration_ms": 0.3}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "too_few_words", "status_code": 400, "input": "!!! ??? ... ,,, ;;; --- ((( )))", "input_chars": 31, "duration_ms": 0.6}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "too_few_words", "status_code": 400, "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "input_chars": 4000, "duration_ms": 0.4}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "too_few_words", "status_code": 400, "input": "🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣🙂🙃😀😃😄😁😆😅😂🤣", "input_chars": 200, "duration_ms": 0.4}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "too_few_words", "status_code": 400, "input": "هذا نص باللغة العربية لاختبار كيفية تعام", "input_chars": 105, "duration_ms": 0.7}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "text_too_long", "status_code": 400, "input": "We got to the campsite about four. The p", "input_chars": 57640, "duration_ms": 0.5}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "invalid_text", "status_code": 400, "input": null, "input_chars": null, "duration_ms": 0.3}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "invalid_text", "status_code": 400, "input": null, "input_chars": null, "duration_ms": 0.5}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "invalid_json", "status_code": 400, "input": null, "input_chars": null, "duration_ms": 0.3}
+{"timestamp": "2026-11-15T22:35:58+00:00", "reason": "too_few_words", "status_code": 400, "input": "I walked to the coffee shop this morning", "input_chars": 47, "duration_ms": 0.6}
+```
+
+Criterion 4, my ten paragraphs:
+
+```
+N1  200  ai  confidence 0.5647
+N2  200  human  confidence 0.6037
+N3  200  ai  confidence 0.5776
+N4  200  human  confidence 0.6763
+N5  200  ai  confidence 0.541
+N6  200  human  confidence 0.7514
+N7  200  human  confidence 0.9044
+N8  200  human  confidence 0.8625
+N9  200  human  confidence 0.7002
+N10 200  human  confidence 0.7385
+```
+
+Criterion 5, `duration_ms` of the same ten scored requests (from `audit.py::log_decision` entries, matched by `content_id`):
+
+```
+[107.6, 80.8, 196.2, 75.1, 170.9, 390.2, 69.3, 67.8, 66.2, 67.5]
+```
+
+**Diagnosis**
+
+*Criterion 2 (MISSED, 0 of 10).* The stage is the input guard, `guard.py::check_text`, and the signal behind it. The guard counts words with `stylometry.words`, which only keeps the letters a to z, digits and apostrophes, so a French or Spanish sentence of ordinary length still counts as 16 to 23 "words" and passes. Nothing in the guard checks which language the text is in. The text then reaches signal one, GPT-2, which was trained on English: it finds French and Spanish surprising, so `model_score` comes out low (0.11 to 0.40), and a low model score reads as human. Four of the ten were labeled "written by a person" at 0.67 to 0.72 confidence, the other six "unsure". The mechanism is a missing check at the guard, which sends text the detector can't judge to a detector that gives a confident-looking answer anyway.
+
+*Criterion 3 (MISSED, 9 of 22).* Two separate causes.
+- Ten of the 13 misses are the French and Spanish sentences. They were never refused, so no rejected entry exists to be logged. This is the same root as criterion 2, not a logging fault.
+- Three misses are real logging faults: a missing `text` field (NEW1), `text` sent as a number (NEW2) and broken JSON (NEW3). `app.py::_input_fields` only records `input` when `text` is a string, so these entries exist, with a timestamp, reason and `duration_ms`, but `input` is null. What came in is not recorded for them, which is exactly what the criterion asked for.
+
+*Pattern.* Criterion 2 and ten of the 13 criterion 3 misses are one problem with two symptoms: the guard has no language check. The other three criterion 3 misses are a second, smaller problem in how rejected requests are logged.
+
+*Criteria met.* 1, 4 and 5 were met. Criterion 5 was met with room to spare, which means the target was set too low: the ten warm scored requests took 66 to 390 ms (30 of 30 across the three trials, mean 127 ms), where I allowed 3,000 ms. I would tighten it to 9 of 10 under 500 ms. I set 3 seconds from the 26-second first request, which was the model loading, not the cost of a normal request.
+
+**The Improvement**
+
+*What I changed:* One change in `guard.py::check_text`, with its setting in `config.py`: an English check. The share of a text's words that are very common English words (the, and, to, of, was, and about 50 more, listed in `guard.py::ENGLISH_COMMON`) must be at least 10% (`ENGLISH_COMMON_MIN_SHARE = 0.10`), or the request is refused with a 400 `not_english`. Ordinary English is about a third of these words and French or Spanish is almost none.
+
+*Which diagnosis it follows from:* The criterion 2 diagnosis (no language check at the guard). It should also fix ten of the 13 criterion 3 misses, because refusing the foreign sentences means they get rejected entries. It does nothing about the three `input` null entries (NEW1 to NEW3), so I am leaving those and expect criterion 3 to still miss.
+
+*How I chose 10%:* I measured the share on my own English texts and on five other French and Spanish sentences I wrote separately from the test set (shares of 0 to 4% on those, and 22% to 48% on the English, apart from one list-style line at 8%). 10% sits in the gap.
+
+*What I predicted before running it again* (from those shares, computed before the after run):
+- Eight of the ten test sentences are refused. Two slip through, ES2 (13%) and ES4 (11%), so criterion 2 gets 8 of 10 and stays MISSED.
+- One of my own paragraphs is refused by mistake: the list-style line "Soft life: slow mornings, coffee, home, ..." (8%, N7). Criterion 4 drops to 9 of 10, which still meets its target.
+- Criterion 3 goes from 9 of 22 to 17 of 22 (eight more foreign refusals logged), still MISSED because of NEW1 to NEW3 and the two slips.
+- Criteria 1 and 5 do not change.
