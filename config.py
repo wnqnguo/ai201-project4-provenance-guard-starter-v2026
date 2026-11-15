@@ -57,6 +57,10 @@ DETECTOR_MAX_TOKENS = 400
 # Capstone: shortest text the guard will score, in Latin-letter words.
 MIN_WORDS = 10
 
+# Capstone improvement: at least this share of a text's words must be very common
+# English words (guard.py::ENGLISH_COMMON), or it is refused as not English.
+ENGLISH_COMMON_MIN_SHARE = 0.10
+
 WEIGHT_MODEL_SIGNAL = 0.5
 WEIGHT_STYLE_SIGNAL = 0.5
 
