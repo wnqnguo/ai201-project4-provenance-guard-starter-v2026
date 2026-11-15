@@ -1092,6 +1092,35 @@ Out of scope, on purpose:
 - Any change to the two signals, the weights or the thresholds. That is a different problem (the evasion attacks) and would mix two changes together.
 - A hosted deploy. The detector loads GPT-2 locally, which doesn't fit a free 512 MB host, so this runs locally with logs (Path B).
 
+**Running It**
+
+Path B, local with logs. The service runs on my laptop with `python app.py`, and RUNNING.md holds the start command, the Python version (3.12), the pinned dependencies and the one model file (GPT-2, about 550 MB). I took Path B from the start because GPT-2 does not fit a free 512 MB host. Both the before and after runs below were produced this way, and their results and the audit log are committed in `results/` and `logs/audit.jsonl`. One honest gap: I have not yet followed RUNNING.md from a fresh clone in a new folder, so a missing step there would not have been caught.
+
+**Instrumentation**
+
+Every request to `/submit`, accepted or refused, appends one JSON line to `logs/audit.jsonl` (written by `audit.py`, called from `app.py::submit` and `app.py::_refuse`). A scored request records: `timestamp`, `content_id`, `creator_id`, `guess`, `model_score`, `style_score`, `combined_score`, `label`, `status`, plus the capstone additions `duration_ms` (time from the start of the request to the log write) and `input` (the first 200 characters of the text) with `input_chars` (its full length). A refused request records `timestamp`, `creator_id`, `event: rejected`, `status`, `reason`, `route`, `status_code`, `duration_ms`, `input` and `input_chars`. The last four of the entries below are failed runs (rejected inputs). Real entries, from trial 1 of the after run (`capstone_run.py`, read back through `GET /log`); labels and long inputs are cut for width, nothing else is changed:
+
+```
+{"combined_score": 0.4284, "content_id": "f30b9f08-af17-4639-b7d1-28a645bb6753", "creator_id": "cap_t1_ES2", "duration_ms": 122.1, "guess": "human", "input": "Mi hermana vive en Madrid desde hace tres años y trabaja en ...", "input_chars": 102, "label": "We can't tell for certain how this was w...", "model_score": 0.3133, "status": "decided", "style_score": 0.5435, "timestamp": "2026-11-15T22:48:32+00:00"}
+{"combined_score": 0.3876, "content_id": "6274a190-7875-49f9-b1db-846b5b7a3124", "creator_id": "cap_t1_ES4", "duration_ms": 75.7, "guess": "human", "input": "Por la mañana me gusta tomar un café caliente mientras leo l...", "input_chars": 95, "label": "We can't tell for certain how this was w...", "model_score": 0.2752, "status": "decided", "style_score": 0.5, "timestamp": "2026-11-15T22:48:32+00:00"}
+{"combined_score": 0.5647, "content_id": "590efbe0-677f-4a7e-bba0-1111b0272365", "creator_id": "cap_t1_N1", "duration_ms": 107.4, "guess": "ai", "input": "At a funeral, an old woman is wearing all black elegant dres...", "input_chars": 247, "label": "We can't tell for certain how this was w...", "model_score": 0.7372, "status": "decided", "style_score": 0.3922, "timestamp": "2026-11-15T22:48:32+00:00"}
+{"combined_score": 0.3963, "content_id": "476300b7-ade0-4832-9fc8-dae37ccdea34", "creator_id": "cap_t1_N2", "duration_ms": 83.1, "guess": "human", "input": "I spilled coffee on my keyboard this morning and spent twent...", "input_chars": 177, "label": "We can't tell for certain how this was w...", "model_score": 0.4299, "status": "decided", "style_score": 0.3627, "timestamp": "2026-11-15T22:48:33+00:00"}
+{"combined_score": 0.5776, "content_id": "a8783aef-6f26-4a17-a16f-d68fb32c35fe", "creator_id": "cap_t1_N3", "duration_ms": 195.4, "guess": "ai", "input": "My experience from SolarCity has prepared me to take on bigg...", "input_chars": 609, "label": "We can't tell for certain how this was w...", "model_score": 0.6534, "status": "decided", "style_score": 0.5017, "timestamp": "2026-11-15T22:48:33+00:00"}
+{"combined_score": 0.3237, "content_id": "2f0a897c-f411-475e-906f-073fb9a47ae7", "creator_id": "cap_t1_N4", "duration_ms": 83.0, "guess": "human", "input": "Etsy is a great platform for people who wants to test out st...", "input_chars": 153, "label": "This looks like it was written by a pers...", "model_score": 0.201, "status": "decided", "style_score": 0.4464, "timestamp": "2026-11-15T22:48:33+00:00"}
+{"combined_score": 0.541, "content_id": "5bfb005e-c341-4d91-97a5-35306c13ba4d", "creator_id": "cap_t1_N5", "duration_ms": 230.9, "guess": "ai", "input": "Etsy is a great platform for people who wants to test out st...", "input_chars": 510, "label": "We can't tell for certain how this was w...", "model_score": 0.4501, "status": "decided", "style_score": 0.6319, "timestamp": "2026-11-15T22:48:33+00:00"}
+{"combined_score": 0.2486, "content_id": "2ba900ac-187b-4dd2-a87d-e22f0d797a55", "creator_id": "cap_t1_N6", "duration_ms": 370.7, "guess": "human", "input": "So ngl I’m not new to online business I had quite few Etsy s...", "input_chars": 941, "label": "This looks like it was written by a pers...", "model_score": 0.0985, "status": "decided", "style_score": 0.3988, "timestamp": "2026-11-15T22:48:33+00:00"}
+{"creator_id": "cap_t1_MF03", "duration_ms": 0.4, "event": "rejected", "input": "\u0001\u0002 test \u001b[31mred\u001b[0m", "input_chars": 20, "reason": "too_few_words", "route": "/submit", "status": "rejected", "status_code": 400, "timestamp": "2026-11-15T22:48:32+00:00"}
+{"creator_id": "cap_t1_NEW1", "duration_ms": 0.4, "event": "rejected", "input": null, "input_chars": null, "reason": "invalid_text", "route": "/submit", "status": "rejected", "status_code": 400, "timestamp": "2026-11-15T22:48:32+00:00"}
+{"creator_id": "unknown", "duration_ms": 0.5, "event": "rejected", "input": null, "input_chars": null, "reason": "invalid_json", "route": "/submit", "status": "rejected", "status_code": 400, "timestamp": "2026-11-15T22:48:32+00:00"}
+{"creator_id": "cap_t1_FR1", "duration_ms": 0.4, "event": "rejected", "input": "Hier soir, nous avons préparé un grand dîner pour toute la f...", "input_chars": 102, "reason": "not_english", "route": "/submit", "status": "rejected", "status_code": 400, "timestamp": "2026-11-15T22:48:32+00:00"}
+```
+
+**What It Costs**
+
+There is no API spend: signal one runs GPT-2 on my own laptop. The cost I measured is seconds of compute for one scored request, read from `duration_ms` in the service's own log. Across the 57 warm scored requests in the before and after runs (30 and 27; criterion 5's measurements), the mean was 132 ms (range 66 to 390 ms). The one-off cost is the model load: the first scored request after starting the app took 26.6 s. Refused requests cost about 1 ms.
+
+For a hundred people a day, one scored submission each: 100 x 0.13 s = about 13 s of compute a day, plus one 27 s model load per start if the service restarts daily, so roughly 40 s a day in total on this laptop. That is a measurement on my Mac, not a hosting quote.
+
 **Run Log and Verdicts**
 
 Produced by `capstone_run.py::main` and `capstone_run.py::run_trial` (inputs in `capstone_inputs.json`), service running as in RUNNING.md. Raw results: `results/capstone_2026-11-15_1436_before.json` and `.md`. Every request used its own `creator_id`, so the rate limiter was not what was measured.
@@ -1205,3 +1234,58 @@ Criterion 5, `duration_ms` of the same ten scored requests (from `audit.py::log_
 - One of my own paragraphs is refused by mistake: the list-style line "Soft life: slow mornings, coffee, home, ..." (8%, N7). Criterion 4 drops to 9 of 10, which still meets its target.
 - Criterion 3 goes from 9 of 22 to 17 of 22 (eight more foreign refusals logged), still MISSED because of NEW1 to NEW3 and the two slips.
 - Criteria 1 and 5 do not change.
+
+**After the improvement**
+
+Same `capstone_run.py`, same inputs, three trials. Raw results: `results/capstone_2026-11-15_1448_after.json` and `.md`.
+
+| Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
+|---|---|---|---|---|---|
+| 1. Bad input refused with a 400 and a message | 12 of 12 | 12/12 | 12/12 | 12/12 | MET |
+| 2. French/Spanish refused with a 400 | 9 of 10 | 8/10 | 8/10 | 8/10 | MISSED |
+| 3. Every refusal logged with `input` and `duration_ms` | 22 of 22 | 17/22 | 17/22 | 17/22 | MISSED |
+| 4. My own paragraphs scored, not refused | 9 of 10 | 9/10 | 9/10 | 9/10 | MET |
+| 5. Warm scored request under 3 s | 9 of 10 | 9/10 | 9/10 | 9/10 | MET |
+
+Real output, trial 1 (produced by `capstone_run.py::run_trial`).
+
+The ten foreign-language sentences, status and error (eight refused, two scored):
+
+```
+FR1  400  not_english
+FR2  400  not_english
+FR3  400  not_english
+FR4  400  not_english
+FR5  400  not_english
+ES1  400  not_english
+ES2  200  scored: We can't tell for certain how 
+ES3  400  not_english
+ES4  200  scored: We can't tell for certain how 
+ES5  400  not_english
+```
+
+The one of my own paragraphs that was refused by mistake (N7, a short list-style line), as input id, status and error:
+
+```
+[('N7', 400, 'not_english')]
+```
+
+**Did it help, and how do I know:** Yes, partly. Criterion 2 went from 0 of 10 to 8 of 10 and criterion 3 from 9 of 22 to 17 of 22, so the ten that were never refused are now eight refused and logged. It is still a miss on both because two sentences (ES2 at 13% common English words and ES4 at 11%) are above my 10% line and three log entries still have no `input` (NEW1 to NEW3, which the change was never aimed at). I know the change did it because only the English check changed between the two runs, the inputs were identical, and the trials came out identical three times. The result also matched my prediction exactly (8 of 10, one of my own paragraphs refused, 17 of 22), which tells me I understood the mechanism.
+
+**What it cost elsewhere:** One of my own ten paragraphs, the list-style line N7, is now refused as "not English" (it has few small words, 8%), so criterion 4 fell from 10 of 10 to 9 of 10. It still meets its target of 9 of 10, but that is exactly the slip I said I could tolerate, and it is a real writer wrongly refused. Criterion 5 reads 9 of 10 instead of 10 of 10 only because that refused paragraph is no longer scored, so there are nine timings instead of ten; every one of the nine was still under 400 ms. Criteria 1 and 5 otherwise did not change. I also note the refusal for foreign text is correct only by a rule of thumb (common-word share), not by actually identifying a language.
+
+**What's Still Broken**
+
+- *Criterion 2, 8 of 10 (target 9 of 10).* Two Spanish sentences, ES2 (13%) and ES4 (11%), have enough words that overlap with English function words (such as "a" and "me") to clear my 10% line. I would raise the line to about 15% and, better, replace the word-share rule with a real language detector. I stopped because the brief allows one improvement, and moving the line up would refuse more of my own writing: N7 is already refused at 8%, and my calibration used only five held-out sentences, so I did not trust a second number I could not test.
+- *Criterion 3, 17 of 22 (target 22 of 22).* Three of the five misses are NEW1 to NEW3 (missing `text`, `text` as a number, broken JSON): `app.py::_input_fields` only logs `input` when `text` is a string. I would log the first 200 bytes of the raw request body for those. I stopped because that is a second, separate change and the language check covered ten of the 13 misses, so I chose that one. The other two misses are ES2 and ES4, the same as criterion 2.
+- *Criterion 4, now 9 of 10, still MET but costing one real writer.* The list-style line N7 is refused as not English. I would fix it with the same language detector as above.
+- *Criterion 5 was set too low.* All warm requests took under 400 ms, so a 3 second target tells me nothing. I would tighten it to 9 of 10 under 500 ms.
+- *Known from Unit 8, not touched here:* nine of the ten evasion attacks still get a non-AI label, the rate limiter can be bypassed by changing `creator_id`, and prompt injection PI02 still gets a human label. These are out of scope for this extension, as written in The Shape.
+
+If this were real and I had another unit, the first thing I would do is rebuild the test set much larger (50 or more sentences each in French, Spanish and several other languages, and 30 or more of my own English paragraphs, including short and list-style ones) before changing the threshold. Everything I measured about the English check rests on ten sentences, so a bigger set would tell me whether 10% is right before I tune anything.
+
+**How I Used AI**
+
+*Moment 1: writing the criteria.* I did not know how to decide a target, so I asked Claude how to write them. It gave me a fill-in-the-blank sentence for each, with questions to answer, and later example commands for bad inputs I had not tried. Trying those, I found that a French sentence got a confident "written by a person" label, and I wrote the French/Spanish criterion and its 9 of 10 target myself. When I was sick and could not decide the rest, I asked Claude to draft the other four from what I had found, and I approved them as drafted, with no changes. `criteria.md` says this.
+
+*Moment 2: building and testing it.* I asked Claude to recommend the shape ("whatever you recommend") and went along with its pick of Provenance Guard and shape B. It then wrote the guard, the logging changes, the test inputs, the three-trial runner, the diagnoses, the improvement and these README sections. I ran the app and every test command on my machine and pasted back the results, tried the bad inputs by hand, and decided to count the French result as a real failure to test. I did not write the code or the diagnoses myself, and I have not re-checked every number by hand. Claude predicted the after results before the run, and they came out as predicted.
