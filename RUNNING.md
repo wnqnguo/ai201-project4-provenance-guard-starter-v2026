@@ -1,5 +1,46 @@
 # Running Provenance Guard
 
+## Capstone run path (Path B: local, with logs)
+
+This service runs on a laptop, not a host. Signal one loads GPT-2 into memory, which does not fit a free 512 MB host, so the run path is local with a committed record of it running.
+
+**Environment**
+
+- Python 3.12 (supported: 3.11 to 3.13, not 3.14)
+- Dependencies pinned in `requirements.txt` (flask, flask-limiter, requests, transformers, torch, gunicorn, certifi). Tested here with torch 2.2.x and numpy below 2.
+- One model file: GPT-2 (`gpt2`), about 550 MB, downloaded the first time `python detector.py` runs and cached after that.
+- No API key and no account.
+
+**Start command, from a clean checkout**
+
+```bash
+git clone https://github.com/wnqnguo/ai201-project4-provenance-guard-starter-v2026
+cd ai201-project4-provenance-guard-starter-v2026
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python detector.py        # first time only: downloads the model
+python app.py             # starts the service on http://127.0.0.1:5000
+```
+
+If port 5000 is taken (macOS AirPlay uses it), start with `PORT=5001 python app.py` and use 5001 in the curl commands.
+
+**Check it is alive, then try the extension**
+
+```bash
+curl http://127.0.0.1:5000/health
+curl -X POST http://127.0.0.1:5000/submit -H "Content-Type: application/json" \
+  -d '{"text": "x", "creator_id": "me"}'
+```
+
+The second call should return a 400 `too_few_words` (before the capstone it was a 500).
+
+**Where the record goes**
+
+Every request, accepted or refused, is appended to `logs/audit.jsonl` as one JSON object per line. Read it with `curl "http://127.0.0.1:5000/log?limit=50"`. The committed run record for this unit is in `results/`.
+
+---
+
+
 Everything about how the starter works.
 
 This is a **web service**. It runs on your machine and you talk to it with
