@@ -6,7 +6,8 @@ This service runs on a laptop, not a host. Signal one loads GPT-2 into memory, w
 
 **Environment**
 
-- Python 3.12 (supported: 3.11 to 3.13, not 3.14)
+- Python 3.12 (supported: 3.11 to 3.13, not 3.14). The default `python3` on some Macs is newer than that, and then `pip install` fails with "No matching distribution found for torch". Use `python3.12` explicitly, as below.
+- Tested on an Intel Mac (x86_64). The newest `torch` for Intel Macs is 2.2.2, which is why `numpy` is pinned below 2 in `requirements.txt`.
 - Dependencies pinned in `requirements.txt` (flask, flask-limiter, requests, transformers, torch, gunicorn, certifi). Tested here with torch 2.2.x and numpy below 2.
 - One model file: GPT-2 (`gpt2`), about 550 MB, downloaded the first time `python detector.py` runs and cached after that.
 - No API key and no account.
@@ -16,7 +17,8 @@ This service runs on a laptop, not a host. Signal one loads GPT-2 into memory, w
 ```bash
 git clone https://github.com/wnqnguo/ai201-project4-provenance-guard-starter-v2026
 cd ai201-project4-provenance-guard-starter-v2026
-python3 -m venv .venv && source .venv/bin/activate
+python3.12 -m venv .venv && source .venv/bin/activate   # must be Python 3.11 to 3.13
+python --version                                       # check it says 3.12 (or 3.11 / 3.13)
 pip install -r requirements.txt
 python detector.py        # first time only: downloads the model
 python app.py             # starts the service on http://127.0.0.1:5000
